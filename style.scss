@@ -1,109 +1,100 @@
 // **********************variables:********************
 
+$prim-color: #e0e7ff;
+$ops-color: #c7d2fe;
+$eq-color: #f9a8d4;
 // **********************MIXINS********************
 
-.btn-num {
-	background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
-	background-color:#ffffff;
-	border:1px solid #dcdcdc;
-	display:inline-block;
+@mixin btn {
+    display:inline-block;
 	cursor:pointer;
 	color:#666666;
 	font-family:Arial;
-	font-size:15px;
+	font-size: 2rem;
 	font-weight:bold;
-	padding:12px 50px;
 	text-decoration:none;
-	text-shadow:0px 1px 0px #ffffff;
-
-    &:hover {
-        background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
-	    background-color:#f6f6f6;
-    }
+	text-shadow: 0 0.001rem 0 #766a6a;
     &:active {
         position:relative;
-	    top:1px;
+	    top: 0.05rem;
     }
 }
 
-.btn-hist {
-    background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
-	background-color:#ffffff;
-	border:1px solid #dcdcdc;
-	display:inline-block;
-	cursor:pointer;
-	color:#666666;
-	font-family:Arial;
-	font-size:15px;
-	font-weight:bold;
-	padding:12px 50px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #ffffff;
 
-    &:hover {
-        background:linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
-	    background-color:#f6f6f6;
-    }
-    &:active {
-        position:relative;
-	    top:1px;
-    }
-
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    
 }
 
-.fake-btn, #c-btn {
-    background-color: lightblue;
-    background:linear-gradient(to bottom, #ffffff 5%, #f6f6f6 100%);
-    border:1px solid #dcdcdc;
-    color:#666666;
-    font-family:Arial;
-    font-size:15px;
-    font-weight:bold;
-}
 
-.btn-img {
+.control-imgs {
     height: 5vh;
     width: 4vw;
-}
-
-.history-div {
-    display: flex;
-    flex-direction: column;
-    grid-row: 1/-1;
-}
-
-.main-cal {
-    display: none;
-    grid-template-columns: 1fr 3fr 1fr;
-    grid-template-rows: repeat(7, 1fr);
-}
-
-.main-pt {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    grid-row: 3/-1;
-    grid-column: 1/-1;
-}
-
-
-
-
-
-
-
-@mixin wide-spaces($col1: 2, $col2:-2) {
-    grid-column: $col1/$col2;
-}
-
-
-#main-c {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(7, 1fr);
 }
 
 .wider {
     grid-column: 2/ -2;
 }
 
+button.btn-num {
+    @include btn;
+    &:hover{
+        background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+    background-color: #030b2c;
+    }
+}
+
+#main-c {
+    background-color: black;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    gap: 0.1rem;
+    border: solid 0.1em;
+    height: 75vh;
+    width: 75vw;
+    position: relative;
+    left: 12vw;
+    top: 7vh;
+    & .btn-control, .opers {
+        
+        background-color: $ops-color;
+        font-size: 2rem;
+        &:hover {
+            background: linear-gradient(to bottom, #a8b5f4 5%, #cbc3f3 100%);
+            background-color: #c2cdf7;
+        }
+        @include btn;
+    }
+
+    & .fake-btn {
+        background-color: $ops-color;
+    }
+
+    // EQUAL BUTTON
+
+    & button[id='='] {
+        @include btn;
+        background-color: $eq-color;
+        &:hover {
+        background:linear-gradient(to bottom, #f9b2c3 5%, #f894b2 100%);
+        background-color:#5b4d55;
+        }
+    }
+    
+}
+
+#cal-header {
+    background-color: #c7d2fe;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    
+}
+
+h3.wider {
+    font-size: 2.5rem;
+}
