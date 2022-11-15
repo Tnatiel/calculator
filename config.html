@@ -7,36 +7,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Configure</title>
     <link rel="stylesheet" href="/styles/config.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+SC&family=Amatic+SC:wght@700&family=Archivo+Narrow:wght@500&family=Concert+One&family=Source+Code+Pro&display=swap" rel="stylesheet">
 </head>
 <body>
-    <main class="main-p">
-        <h1>Customize the page as you please</h1>
-        <div class="color">
-            <label for="color-select">Please select a color:</label>
-            <select name="colors" id="color-select">    
-                <option value="red">Red</option>
-                <option value="green">Green</option>
-                <option value="blue">Blue</option>
-                <option value="yellow">Yellow</option>
-                <option value="purple">Purple</option>
-            </select>
-        </div>
+    <main>
+        <section class="main-sec">
+            <!-- TRY BULID -->
 
-        <div class="font">
-            <label for="font-select">Please select a font:</label>
-            <select name="font" id="fonts-select">
-                <option value="red">halvatica</option>
-                <option value="green">mossaret</option>
-                <option value="blue">new roman times</option>
-                <option value="yellow">david</option>
-                <option value="purple">ariel</option>
-            </select>
-        </div>
-        <div class="mode">
-            <label for="dark-mode">Dark mode:</label>
-            <input type="range" name="dark-mode" id="dark-mode">
-        </div>
+            <h1 id="header">Customize the page as you please</h1>
+            <div class="labels">
+                <label for="color-select">Please select a color:</label>
+                <label for="font-select">Please select a font:</label>
+            </div>
+            <div class="selects">
+                <select name="colors" id="color-select">    
+                    <option value="">--Choose a color--</option>
+                    <option value="red">Red</option>
+                    <option value="green">Green</option>
+                    <option value="blue">Blue</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="purple">Purple</option>
+                </select>
+                <br>
+                <select name="font" id="font-select">
+                    
+                    <option value="">--Choose a font--</option>
+                    <option value="alegreya-sc">Alegreya SC</option>
+                    <option value="archivo-Narrow">Archivo Narrow</option>
+                    <option value="concert One">Concert One</option>
+                    <option value="source-Code-Pro">Source Code Pro</option>
+                    <option value="amatic-sc">Amatic SC</option>
+                </select>
+            </div>
+            <div class="mode">
+                <label class="labels" for="mode">Choose mode:</label>
+                <label class="switch">
+                    <input type="checkbox" id="mode">
+                    <span class="slider"></span>
+                </label>
 
-    </main>
-</body>
+                <button class="sub-btn"><input type="submit">Submit</button>
+            </div>
+            
+        </section>
+            
+        </main>
+    </body>
 </html>
