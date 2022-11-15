@@ -93,8 +93,7 @@ $font5: font-family 'Source Code Pro', monospace;
     background-color: lightcyan;
     width: fit-content;
     position: relative;
-    left: 11vw;
-    top: 5vh;
+    top: 15vh;
     padding: 3rem;
   }
   
@@ -154,4 +153,9 @@ input[type='checkbox'] {
 	position:relative;
 	top:1px;
 }
+}
+
+body {
+    display: flex;
+    justify-content: center;
 }
