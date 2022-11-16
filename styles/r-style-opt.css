@@ -4,6 +4,10 @@
   border: 0;
 }
 
+svg path {
+  fill: #413d3d;
+}
+
 .control-imgs {
   height: 5vh;
   width: 4vw;

@@ -1,6 +1,6 @@
+
+
 // INFO FUCNTION
-
-
 function infoButton() {   
     alert(`        Developers name: Natiel
         Calculator version: 1
@@ -9,14 +9,12 @@ function infoButton() {
 }
 
 // BUTTONS INFO
-
 const buttons = document.getElementsByClassName('btns');
-
 function displayButtonInfo(val)  {
         val.addEventListener('click', alert(val.id));       
     }   
 
-
+// Checks if a given key is operator or number
 function is_oper(input_key) {
     opers = ['=', '+', '-', '*', '/']
     if (opers.indexOf(input_key) > -1) {
@@ -24,6 +22,7 @@ function is_oper(input_key) {
     }
     return false
 }
+
 
 function cal(o1, o2, a) {
 
@@ -50,31 +49,36 @@ const CalState = {
     second_op: '',
     action: '',
     
-    evalState: function() {
-        return eval(this.first_op + this.action + this.second_op)
-    },
+    // evalState: function() {
+    //     return eval(this.first_op + this.action + this.second_op)
+    // },
 
-    parseKey: function(){
-        const cur_state = this.evalState()
-        for (let i = 0; i + 1 < cur_state; i++) {
-            if (is_oper(cur_state[i] == false)) {
+    parseKey: function(vals){
+        // console.log(cur_state);
+        let l = vals.length
+        for (let i = 0; i < l ; i++) {
+            
+            if (is_oper(vals[i] == false)) {
                 if (this.action == ''){
-                    this.first_op += cur_state[i]
-                } else {this.second_op += cur_state[i]}
+                    this.first_op += vals[i]
+                } else {this.second_op += vals[i]}
             }
             else {
+                
                 if (this.first_op != '' && this.second_op != '') {
                     if (this.action == '') {
-                        this.action = cur_state[i]
+                        this.action = vals[i]
                     }
                     else {
                         let cur_res = cal(this.first_op, this.second_op, this.action)
-                        this.action = cur_state[i]
+                        this.action = vals[i]
                     }
                 }
             }
-
         }  
     }
+
+    
 }
+
 

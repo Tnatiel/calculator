@@ -3,15 +3,17 @@ const values = [];
 
 function pass_value(evt) {
     values.push(evt);
-    // console.log(x);
-    console.log(values);
 }
 
 const opers_btns =  document.getElementsByClassName('opers')
-// console.log(opers_btns)
+const num_btns = document.getElementsByClassName('btn-num')
 
 for (let i = 0; i < opers_btns.length; i++) {
-    const elem = opers_btns[i];
-    // opers_btns.addEventListener('click', pass_value(elem.id));
-    elem.addEventListener('click', function(){pass_value(elem.id)});
+    const oper_btn = opers_btns[i];
+    oper_btn.addEventListener('click', function(){pass_value(oper_btn.id)});
+}
+
+for (let i = 0; i < num_btns.length; i++) {
+    const num_btn = num_btns[i];
+    num_btn.addEventListener('click', function(){pass_value(num_btn.id)});
 }
