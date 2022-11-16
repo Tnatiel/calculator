@@ -49,12 +49,8 @@ const CalState = {
     second_op: '',
     action: '',
     
-    // evalState: function() {
-    //     return eval(this.first_op + this.action + this.second_op)
-    // },
-
     parseKey: function(vals){
-        // console.log(cur_state);
+        
         let l = vals.length
         for (let i = 0; i < l ; i++) {
             
