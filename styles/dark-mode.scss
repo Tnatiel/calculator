@@ -30,7 +30,7 @@ svg path{
   }
 
 .control-imgs {
-    height: 5vh;
+    
     width: 4vw;
 }
 
@@ -63,6 +63,9 @@ button.btn-num {
     & .btn-control, .opers {
         background-color: $d-ops-color;
         font-size: 2rem;
+        
+        
+        
         &:hover {
             background: linear-gradient(to bottom, #4f0826 5%, #b12f65 100%);
             background-color: #c2cdf7;
@@ -84,25 +87,24 @@ button.btn-num {
 }
 
     
-    #cal-header {
-        background-color: $d-ops-color;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        text-align: center;
-        color: $font-color;
-        
-        
-    }
-
-    .fake-btn {
-        background-color: $d-ops-color;
-    }
-
-    h3.wider {
-        font-size: 2.5rem;
-    }
-
-
+#cal-header {
+    background-color: $d-ops-color;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    color: $font-color;
     
+    
+}
+
+.fake-btn {
+    background-color: $d-ops-color;
+}
+
+h3.wider {
+    font-size: 2.5rem;
+}
+
+ 
 
