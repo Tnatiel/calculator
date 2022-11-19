@@ -5,12 +5,29 @@
 }
 
 svg path {
-  fill: #413d3d;
+  fill: #232020;
 }
 
 .control-imgs {
   height: 5vh;
   width: 4vw;
+}
+
+#cal-header {
+  background-color: #c7d2fe;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+}
+
+h3.wider {
+  font-size: 5vw;
+  color: #232020;
+}
+
+#screen {
+  background-color: #c0ffb8;
 }
 
 .wider {
@@ -20,7 +37,7 @@ svg path {
 button.btn-num {
   display: inline-block;
   cursor: pointer;
-  color: #413d3d;
+  color: #232020;
   font-family: Arial;
   font-size: 2rem;
   font-weight: bold;
@@ -54,7 +71,7 @@ button.btn-num:hover {
   font-size: 2rem;
   display: inline-block;
   cursor: pointer;
-  color: #413d3d;
+  color: #232020;
   font-family: Arial;
   font-size: 2rem;
   font-weight: bold;
@@ -75,7 +92,7 @@ button.btn-num:hover {
 #main-c button[id="="] {
   display: inline-block;
   cursor: pointer;
-  color: #413d3d;
+  color: #232020;
   font-family: Arial;
   font-size: 2rem;
   font-weight: bold;
@@ -90,18 +107,6 @@ button.btn-num:hover {
 #main-c button[id="="]:hover {
   background: linear-gradient(to bottom, #f9b2c3 5%, #f894b2 100%);
   background-color: #5b4d55;
-}
-
-#cal-header {
-  background-color: #c7d2fe;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  text-align: center;
-}
-
-h3.wider {
-  font-size: 2.5rem;
 }
 
 /*# sourceMappingURL=r-style-opt.css.map */

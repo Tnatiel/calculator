@@ -3,6 +3,8 @@
 $prim-color: #e0e7ff;
 $ops-color: #c7d2fe;
 $eq-color: #f9a8d4;
+$font-color: #232020;
+
 
 
 // **********************MIXINS********************
@@ -10,7 +12,7 @@ $eq-color: #f9a8d4;
 @mixin btn {
     display:inline-block;
 	cursor:pointer;
-	color:#413d3d;
+	color:$font-color;
 	font-family:Arial;
 	font-size: 2rem;
 	font-weight:bold;
@@ -22,8 +24,6 @@ $eq-color: #f9a8d4;
     }
 }
 
-
-
 * {
     margin: 0;
     padding: 0;
@@ -31,8 +31,9 @@ $eq-color: #f9a8d4;
     
 }
 
+// IMG CONTROLS
 svg path{
-    fill:#413d3d;
+    fill: $font-color;
   }
 
 
@@ -40,6 +41,29 @@ svg path{
     height: 5vh;
     width: 4vw;
 }
+
+// HEADER
+#cal-header {
+    background-color: #c7d2fe;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    
+}
+
+h3.wider {
+    font-size: 5vw;
+    color: $font-color;
+}
+
+// SCREEN
+
+#screen {
+    background-color: #c0ffb8;
+}
+
+// BUTTONS
 
 .wider {
     grid-column: 2/ -2;
@@ -49,7 +73,7 @@ button.btn-num {
     @include btn;
     &:hover{
         background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
-    background-color: #030b2c;
+        background-color: #030b2c;
     }
 }
 
@@ -93,16 +117,5 @@ button.btn-num {
     
 }
 
-#cal-header {
-    background-color: #c7d2fe;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    text-align: center;
-    
-}
 
-h3.wider {
-    font-size: 2.5rem;
-}
 

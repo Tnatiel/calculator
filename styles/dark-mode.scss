@@ -25,22 +25,51 @@ $font-color: #c7c4c4;
     
 }
 
+// IMG CONTROLS
+
 svg path{
     fill:#c7c4c4;
   }
 
 .control-imgs {
-    
     width: 4vw;
+    height: 5vh;
 }
+
+// HEADER
+
+#cal-header {
+    background-color: $d-ops-color;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+    color: $font-color;  
+}
+
+
+h3.wider {
+    font-size: 5vw;
+    color: $font-color;
+}
+
+// SCREEN
+
+#screen {
+    background-color: #3a5137;
+}
+
+// BUTTONS
 
 .wider {
     grid-column: 2/ -2;
 }
 
 button.btn-num {
+
     @include btn;
     background-color: #a93465;
+
     &:hover{
         background: linear-gradient(to bottom, #8b2851 5%, #6d4456 100%);
         background-color: #030b2c;
@@ -53,7 +82,7 @@ button.btn-num {
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(7, 1fr);
     gap: 0.1rem;
-    border: solid 0.1em;
+    border: solid 0.1em white;
     height: 75vh;
     width: 75vw;
     position: relative;
@@ -87,24 +116,10 @@ button.btn-num {
 }
 
     
-#cal-header {
-    background-color: $d-ops-color;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    text-align: center;
-    color: $font-color;
-    
-    
-}
-
 .fake-btn {
     background-color: $d-ops-color;
 }
 
-h3.wider {
-    font-size: 2.5rem;
-}
 
  
 

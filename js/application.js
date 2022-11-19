@@ -1,6 +1,28 @@
 
-const values = [];
 
+// INFO FUCNTION
+
+document.getElementById('info').addEventListener('click', () => {
+    alert(`        Developers name: Natiel
+        Calculator version: 1
+        Description: A web calculator based on javascript, css and html
+    `)
+})
+
+//  Darkmode 
+document.getElementById('mode').addEventListener('click', () => {
+    let modeBtn = document.querySelector("link[href='styles/r-style-opt.css']");
+    if (modeBtn !== null) {
+        modeBtn.setAttribute("href", "styles/dark-mode.css");
+    } else {
+        let modeBtn = document.querySelector("link[href='styles/dark-mode.css']");
+        modeBtn.setAttribute("href", "styles/r-style-opt.css");
+    }
+
+})
+
+
+const values = [];
 function pass_value(evt) {
     values.push(evt);
 }

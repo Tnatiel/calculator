@@ -5,12 +5,30 @@
 }
 
 svg path {
-  fill: #e5e0e0;
+  fill: #c7c4c4;
 }
 
 .control-imgs {
-  height: 5vh;
   width: 4vw;
+  height: 5vh;
+}
+
+#cal-header {
+  background-color: #711c3f;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+  color: #c7c4c4;
+}
+
+h3.wider {
+  font-size: 5vw;
+  color: #c7c4c4;
+}
+
+#screen {
+  background-color: #3a5137;
 }
 
 .wider {
@@ -43,7 +61,7 @@ button.btn-num:hover {
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(7, 1fr);
   gap: 0.1rem;
-  border: solid 0.1em;
+  border: solid 0.1em white;
   height: 75vh;
   width: 75vw;
   position: relative;
@@ -90,21 +108,8 @@ button.btn-num:hover {
   background-color: #5b4d55;
 }
 
-#cal-header {
-  background-color: #711c3f;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  text-align: center;
-  color: #c7c4c4;
-}
-
 .fake-btn {
   background-color: #711c3f;
-}
-
-h3.wider {
-  font-size: 2.5rem;
 }
 
 /*# sourceMappingURL=dark-mode.css.map */
