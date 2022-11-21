@@ -59,7 +59,7 @@ byId('sci').addEventListener('click', displayScienceSec)
 // history
 function displayHistorySec() {
     if (byId('history-sec').style.display == 'none'){
-        byId('history-sec').style.display = 'flex';
+        byId('history-sec').style.display = 'grid';
         byId('main-c').style.borderLeft = 'none';
     } else { 
         byId('history-sec').style.display = 'none';

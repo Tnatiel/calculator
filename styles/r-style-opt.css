@@ -119,7 +119,8 @@ button.btn-num:hover {
   grid-row: 1;
   border: solid;
   display: none;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 0.83fr repeat(5, 1fr);
 }
 #history-sec h4 {
   border-bottom: solid 0.1rem;
@@ -130,7 +131,7 @@ button.btn-num:hover {
 }
 
 #scientific-sec {
-  display: grid;
+  display: none;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1.98fr repeat(4, 1fr);
 }
@@ -170,8 +171,6 @@ button.btn-num:hover {
 body {
   display: flex;
   justify-content: center;
-  align-items: center;
-  overflow: hidden;
 }
 
 #wrap {
@@ -179,7 +178,7 @@ body {
   grid-template-columns: 1fr 2fr 1fr;
   position: relative;
   top: 4rem;
-  width: 75%;
+  width: 90%;
   height: 100%;
 }
 
