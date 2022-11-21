@@ -27,7 +27,11 @@ svg path {
 }
 
 #screen {
-  background-color: #c0ffb8;
+  background-color: #cef7c9;
+  display: flex;
+  align-items: flex-end;
+  padding-left: 1rem;
+  font-size: 3rem;
 }
 
 .wider {
@@ -38,7 +42,6 @@ button.btn-num {
   display: inline-block;
   cursor: pointer;
   color: #232020;
-  font-family: Arial;
   font-size: 2rem;
   font-weight: bold;
   text-decoration: none;
@@ -69,7 +72,6 @@ button.btn-num:hover {
   display: inline-block;
   cursor: pointer;
   color: #232020;
-  font-family: Arial;
   font-size: 2rem;
   font-weight: bold;
   text-decoration: none;
@@ -83,6 +85,24 @@ button.btn-num:hover {
   position: relative;
   top: 0.05rem;
 }
+#main-c button.light-on {
+  background-color: #f4ac28;
+  display: inline-block;
+  cursor: pointer;
+  color: #232020;
+  font-size: 2rem;
+  font-weight: bold;
+  text-decoration: none;
+  text-shadow: 0 0.001rem 0 #766a6a;
+}
+#main-c button.light-on:active {
+  position: relative;
+  top: 0.05rem;
+}
+#main-c button.light-on:hover {
+  background: linear-gradient(to bottom, #ffca67 5%, #e6b967 100%);
+  background-color: #c2cdf7;
+}
 #main-c .fake-btn {
   background-color: #c7d2fe;
 }
@@ -90,7 +110,6 @@ button.btn-num:hover {
   display: inline-block;
   cursor: pointer;
   color: #232020;
-  font-family: Arial;
   font-size: 2rem;
   font-weight: bold;
   text-decoration: none;

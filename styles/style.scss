@@ -15,7 +15,6 @@ $font-color: #232020;
     display:inline-block;
 	cursor:pointer;
 	color:$font-color;
-	font-family:Arial;
 	font-size: 2rem;
 	font-weight:bold;
 	text-decoration:none;
@@ -61,7 +60,11 @@ svg path{
 // SCREEN
 
 #screen {
-    background-color: #c0ffb8;
+    background-color: #cef7c9;
+    display: flex;
+    align-items: flex-end;
+    padding-left: 1rem;
+    font-size: 3rem;
 }
 
 
@@ -99,6 +102,15 @@ button.btn-num {
             background-color: #c2cdf7;
         }
         @include btn;
+    }
+
+    & button.light-on {
+        background-color: #f4ac28;
+        @include btn;
+        &:hover {
+            background: linear-gradient(to bottom, #ffca67 5%, #e6b967 100%);
+            background-color: #c2cdf7;
+        }
     }
 
     & .fake-btn {
