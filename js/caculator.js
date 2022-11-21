@@ -1,16 +1,72 @@
 
 
-let currentValue = 0
-let firstOperand = ''
-let secondOperand = ''
-let currentOperator = ''
 
-const btns = document.getElementsByClassName('btns');
 
-for (let i = 0; i < btns.length; i++) {
-    const btn = btns[i];
-    btn.addEventListener('click', parseKey)
-}
+// const calState = {
+//     currentValue: 0,
+//     firstOperand: '',
+//     secondOperand: '',
+//     secondOperand: '',
+// }
+
+// class Calculator {
+//     constructor(dataStr){
+//         this.firstOperand = '';
+//         this.secondOperand = '';
+//         this.action = '';
+//         this.currentValue = 0;
+//     }
+
+//     cType(key) {
+//         let opers = '+-/x';
+//         if (opers.indexOf(key) > -1) {
+//             return 'operator';
+//         } else if (key == '=') {
+//             return 'eval';
+//         } else {
+//             return 'number';
+//         }
+//     }
+
+//     cParseKey(dataStr) {
+//         for (let i = 0; i < dataStr.length; i++) {
+//             if (this.cType(dataStr[i]) == 'number') {
+//                 if (this.currentOperator == '') {
+//                     this.firstOperand += dataStr[i];
+//                 } else {
+//                     this.secondOperand += dataStr[i];
+//                 } 
+//             } else {
+//                 if (this.firstOperand !== '' && this.secondOperand !== '') {
+//                     const res = eval(this.firstOperand + this.action + this.secondOperand);
+//                     this.firstOperand = res;
+//                     this.action = dataStr[i];
+//                 } else if (i - 1 >= 0 && cType(dataStr[i - 1]) == 'operator') {
+//                     this.action = dataStr[i];
+//                 } else {
+//                     this.action = dataStr[i]
+//                 }
+//             }
+//         }
+//     }
+// }
+
+
+const byId = document.getElementById.bind(document);
+const byClass = document.getElementsByClassName.bind(document);
+
+let currentValue = 0;
+let firstOperand = '';
+let secondOperand = '';
+let currentOperator = '';
+let evalMode = 'Reg';
+
+// const btns = document.getElementsByClassName('btns');
+
+// for (let i = 0; i < btns.length; i++) {
+//     const btn = btns[i];
+//     btn.addEventListener('click', parseKey)
+// }
 
 
 // CHECKS INPUT TYPE
@@ -38,51 +94,68 @@ function parseKey(vals) {
             } 
         } else {
             if (firstOperand !== '' && secondOperand !== '') {
-                cal();
+                const res = eval(this.firstOperand + this.action + this.secondOperand);
+                console.log(res)
+                firstOperand = res;
+                currentValue = res;
                 currentOperator = vals[i]
             } else {
                 currentOperator = vals[i]
             }
         }
     }
+    console.log('first op:', firstOperand)
+    console.log('second op',secondOperand)
+    console.log('cur oper:', currentOperator)
+    console.log('cur val:', currentValue)
 }
 
-let a = document.querySelector(".eq")
-a.addEventListener('click', () => {
-    let curRes = values.join();
-    parseKey(values)
-    cal()
-    console.log(firstOperand)
-    console.log(secondOperand)
-    console.log(currentOperator)
-    alert(eval(firstOperand + currentOperator + secondOperand));
-
-
-function cal(o1, o2, a) {
-
-    if (a == '+') {
-        return eval(o1) + eval(o2)
-    }
-
-    else if (a == '-') {
-        return eval(o1) - eval(o2)
-    }
-
-    else if (a =='*') {
-        return eval(o1) * eval(o2)
-    }
-
-    else if (a == '/') {
-        return eval(o1) / eval(o2)
-    }    
+function clearData() {
+    currentValue = 0
+    firstOperand = ''
+    secondOperand = ''
+    currentOperator = ''
+    values = []
 }
 
-// const CalState = {
-//     cur_val: 0,
-//     first_op: '',
-//     second_op: '',
-//     action: '',
+function updateData() {
     
-//     parseKey: 
+}
+
+// attach events
+
+// OPER BTNS
+
+const operatorBtns = byClass('opers')
+
+for (let i = 0; i < operatorBtns.length; i++) {
+    const operBtn = operatorBtns[i];
+    operBtn.addEventListener('click', () => {
+        parseKey(values);
+        values = []
+    })
+}
+
+
+// equal
+
+let equalBtn = document.querySelector(".eq")
+equalBtn.addEventListener('click', () => {
+    parseKey(values);
+    alert(eval(firstOperand + currentOperator + secondOperand));
+    clearData();
+})
+
+//  all clear
+byId('c').addEventListener('click', clearData);
+
+//  return 
+byId('return').addEventListener('click', () => {
+    values.pop()
+    console.log(values)
+})
+
+
+
 
 

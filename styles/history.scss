@@ -1,0 +1,14 @@
+@mixin history-sec {
+    background-color: #d4fab7;
+    grid-column: 1/ 2;
+    grid-row: 1;
+    border: solid;
+    display: none;
+    flex-direction: column;
+    h4 { 
+        border-bottom: solid 0.1rem;
+        display: inline-block;
+        text-align: center;
+        padding: 0.6rem 0;
+    }
+}

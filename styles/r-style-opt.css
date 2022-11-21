@@ -15,14 +15,11 @@ svg path {
 
 #cal-header {
   background-color: #c7d2fe;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
   text-align: center;
 }
 
 h3.wider {
-  font-size: 5vw;
+  font-size: 4vw;
   color: #232020;
 }
 
@@ -58,13 +55,10 @@ button.btn-num:hover {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(7, 1fr);
+  grid-column: 2/-2;
   gap: 0.1rem;
-  border: solid 0.1em;
+  border: solid;
   height: 75vh;
-  width: 75vw;
-  position: relative;
-  left: 12vw;
-  top: 7vh;
 }
 #main-c .btn-control, #main-c .opers {
   background-color: #c7d2fe;
@@ -107,6 +101,44 @@ button.btn-num:hover {
 #main-c button[id="="]:hover {
   background: linear-gradient(to bottom, #f9b2c3 5%, #f894b2 100%);
   background-color: #5b4d55;
+}
+
+#scientific-sec {
+  background-color: #f9b2c3;
+  grid-column: -1/-2;
+  border: solid;
+  display: none;
+}
+
+#history-sec {
+  background-color: #d4fab7;
+  grid-column: 1/2;
+  grid-row: 1;
+  border: solid;
+  display: none;
+  flex-direction: column;
+}
+#history-sec h4 {
+  border-bottom: solid 0.1rem;
+  display: inline-block;
+  text-align: center;
+  padding: 0.6rem 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+#wrap {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  position: relative;
+  top: 4rem;
+  width: 75%;
+  height: 100%;
 }
 
 /*# sourceMappingURL=r-style-opt.css.map */
