@@ -1,1 +1,42 @@
-@
+@mixin sci-sec {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1.98fr repeat(4, 1fr);
+
+    h4 {
+        border-bottom: solid 0.1rem;
+        display: inline-block;
+        text-align: center;
+        padding-top: 1.6rem;
+        grid-column: 1/-1;
+        font-size: 1.5rem;
+    }
+    #blank {
+        grid-column: 1/-1;
+        // border: solid;
+    }
+    #base-btn {
+        grid-column: 1/-1;
+    }
+
+    .sci-btns {
+        display:inline-block;
+        cursor:pointer;
+        color:$font-color;
+        font-family:Arial;
+        font-size: 1.8rem;
+        font-weight:bold;
+        text-decoration:none;
+        text-shadow: 0 0.001rem 0 #766a6a;
+        border-top: solid 0.1rem;
+
+        &:active {
+            position:relative;
+            top: 0.05rem;
+        }
+    }
+    #sqrt, #sqrt-y, #pie {
+        border-left: solid 0.1rem;
+    }
+}
+

@@ -47,7 +47,7 @@ function displayScienceSec() {
         byId('main-c').style.borderRight = 'solid'
         evalMode = 'Reg'
     } else { 
-        byId('scientific-sec').style.display = 'flex';
+        byId('scientific-sec').style.display = 'grid';
         byId('main-c').style.borderRight = 'none';
         evalMode = 'Sci'
     }

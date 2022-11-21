@@ -1,5 +1,5 @@
 @import 'history';
-@import 'history';
+@import 'scientific';
 // **********************variables:********************
 
 $prim-color: #e0e7ff;
@@ -47,12 +47,15 @@ svg path{
 // HEADER
 #cal-header {
     background-color: $ops-color;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-h3.wider {
-    font-size: 4vw;
+.wider h3{
+    font-size: 3vw;
     color: $font-color;
+    align-self: center;
 }
 
 // SCREEN
@@ -130,6 +133,12 @@ button.btn-num {
 #history-sec {
     @include history-sec
 
+}
+
+// SCIENCE
+
+#scientific-sec {
+    @include sci-sec
 }
 
 // main wrappers
