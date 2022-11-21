@@ -95,7 +95,7 @@ function parseKey(vals) {
         } else {
             if (firstOperand !== '' && secondOperand !== '') {
                 const res = eval(this.firstOperand + this.action + this.secondOperand);
-                console.log(res)
+                console.log(res);
                 firstOperand = res;
                 currentValue = res;
                 currentOperator = vals[i]
@@ -142,7 +142,9 @@ for (let i = 0; i < operatorBtns.length; i++) {
 let equalBtn = document.querySelector(".eq")
 equalBtn.addEventListener('click', () => {
     parseKey(values);
+    let res = eval(firstOperand + currentOperator + secondOperand);
     alert(eval(firstOperand + currentOperator + secondOperand));
+    alert(typeof(res))
     clearData();
 })
 
