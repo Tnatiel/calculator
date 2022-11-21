@@ -14,7 +14,6 @@ const operBtns: HTMLButtonElement[] = byClass('opers');
 
 
 const cal = new Calculator(values)
-// console.log(typeof(cal))
 
 // INFO FUCNTION
 // const infoBtn: HTMLButtonElement = byId('info')
@@ -37,8 +36,22 @@ byId('mode').addEventListener('click', () => {
     }
 });
 
+// CONFIGUE PAGE
 
 
+// POPUP PAGE
+byId('settings').addEventListener('click', () => {
+    console.log('why')
+    let params: string =  'resizable=no,status=no,location=no,toolbar=no,menubar=no,scrollbars=no,location=no,width=500,height=500,left=900,top=300'
+    window.open('http://127.0.0.1:5501/config.html', 'config', params)
+})
+
+// GET FORM DATA
+
+const daForm: HTMLFormElement | null = document.getElementById('config-form');
+const configData: FormData = new FormData(daForm);
+
+ 
 // push values listener
 
 for (let i = 0; i < numBtns.length; i++) {

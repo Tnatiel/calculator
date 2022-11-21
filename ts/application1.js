@@ -8,7 +8,6 @@ var numBtns = byClass('btn-num');
 var values = [];
 var operBtns = byClass('opers');
 var cal = new Calculator(values);
-// console.log(typeof(cal))
 // INFO FUCNTION
 // const infoBtn: HTMLButtonElement = byId('info')
 byId('info').addEventListener('click', function () {
@@ -26,6 +25,16 @@ byId('mode').addEventListener('click', function () {
         byId('mode').classList.add('light-on');
     }
 });
+// CONFIGUE PAGE
+// POPUP PAGE
+byId('settings').addEventListener('click', function () {
+    console.log('why');
+    var params = 'resizable=no,status=no,location=no,toolbar=no,menubar=no,scrollbars=no,location=no,width=500,height=500,left=900,top=300';
+    window.open('http://127.0.0.1:5501/config.html', 'config', params);
+});
+// GET FORM DATA
+var daForm = document.getElementById('config-form');
+var configData = new FormData(daForm);
 var _loop_1 = function (i) {
     var numBtn = numBtns[i];
     numBtn.addEventListener('click', function () {

@@ -88,9 +88,7 @@ button.btn-num {
     grid-column: 2/-2;
     gap: 0.1rem;
     border: solid;
-    // border-bottom: solid;
     height: 75vh;
-    // width: 75vw;
     
 
     & .btn-control, .opers {
@@ -130,19 +128,11 @@ button.btn-num {
     
 }
 
-// SCIENTIFIC
-
-#scientific-sec {
-    background-color: #f9b2c3;
-    grid-column: -1/-2;
-    border: solid;
-    display: none;
-    
-}
 
 // HISROTY
 
 #history-sec {
+    background-color: #d4fab7;
     @include history-sec
 
 }
@@ -150,6 +140,7 @@ button.btn-num {
 // SCIENCE
 
 #scientific-sec {
+    background-color: #f9b2c3;
     @include sci-sec
 }
 
@@ -168,4 +159,123 @@ body {
     width: 90%;
     height: 100%;
     
+}
+
+.dark-body {
+    display: flex;
+    justify-content: center;
+
+    #wrap {
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        position: relative;
+        top: 4rem;
+        width: 90%;
+        height: 100%;
+    }
+
+    #scientific-sec {
+        background-color: #f3053c69;
+        @include sci-sec
+    }
+    
+    #history-sec {
+        background-color: #83ff2350;
+        @include history-sec
+    }
+
+    #main-c {
+        background-color: black;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(7, 1fr);
+        grid-column: 2/-2;
+        gap: 0.1rem;
+        border: solid;
+        height: 75vh;
+    
+
+        & .btn-control, .opers {
+            
+            background-color: $ops-color;
+            font-size: 2rem;
+            &:hover {
+                background: linear-gradient(to bottom, #a8b5f4 5%, #cbc3f3 100%);
+                background-color: #c2cdf7;
+            }
+            @include btn;
+        }
+
+        & button.light-on {
+            background-color: #f4ac28;
+            @include btn;
+            &:hover {
+                background: linear-gradient(to bottom, #ffca67 5%, #e6b967 100%);
+                background-color: #c2cdf7;
+            }
+        }
+
+        & .fake-btn {
+            background-color: $ops-color;
+        }
+
+        // EQUAL BUTTON
+
+        & button[id='='] {
+            @include btn;
+            background-color: $eq-color;
+            &:hover {
+            background:linear-gradient(to bottom, #f9b2c3 5%, #f894b2 100%);
+            background-color:#5b4d55;
+            }
+        }
+
+        // IMG CONTROLS
+        svg path{
+            fill: $font-color;
+        }
+
+
+        .control-imgs {
+            height: 5vh;
+            width: 4vw;
+        }
+
+        // HEADER
+        #cal-header {
+            background-color: $ops-color;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wider h3{
+            font-size: 3vw;
+            color: $font-color;
+            align-self: center;
+        }
+
+        // SCREEN
+
+        #screen {
+            background-color: #cef7c9;
+            display: flex;
+            align-items: flex-end;
+            padding-left: 1rem;
+            font-size: 3rem;
+        }
+
+
+        .wider {
+            grid-column: 2/ -2;
+        }
+
+        button.btn-num {
+            @include btn;
+            &:hover{
+                background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+                background-color: #030b2c;
+            }
+        }
+    }
 }
