@@ -2,7 +2,7 @@
 $d-prim-color:  #971a4e;
 $d-ops-color: #711c3f;
 $d-eq-color: #3c5b82;
-$font-color: #c7c4c4;
+$d-font-color: #c7c4c4;
 // **********************MIXINS********************
 @mixin btn {
     display:inline-block;
@@ -39,7 +39,6 @@ svg path{
 // HEADER
 
 #cal-header {
-    background-color: $d-ops-color;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -92,14 +91,12 @@ button.btn-num {
     & .btn-control, .opers {
         background-color: $d-ops-color;
         font-size: 2rem;
-        
-        
+        @include btn;
         
         &:hover {
             background: linear-gradient(to bottom, #4f0826 5%, #b12f65 100%);
             background-color: #c2cdf7;
-        }
-        @include btn;
+            }
 
         }
 

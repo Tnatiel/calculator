@@ -17,24 +17,32 @@ byId('info').addEventListener('click', function () {
 byId('mode').addEventListener('click', function () {
     var screen = byId('screen');
     if (screen.style.backgroundColor !== 'white') {
+        // console.log(typeof(byId('wrap').classList))
         screen.style.backgroundColor = 'white';
         byId('mode').classList.remove('light-on');
     }
     else {
-        screen.style.backgroundColor = '#c0ffb8';
-        byId('mode').classList.add('light-on');
+        if (byId('body').classList.contains('dark-body')) {
+            screen.style.backgroundColor = '#83ff2350';
+        }
+        else {
+            screen.style.backgroundColor = '#c0ffb8';
+            byId('mode').classList.add('light-on');
+        }
     }
 });
 // CONFIGUE PAGE
 // POPUP PAGE
 byId('settings').addEventListener('click', function () {
     console.log('why');
-    var params = 'resizable=no,status=no,location=no,toolbar=no,menubar=no,scrollbars=no,location=no,width=500,height=500,left=900,top=300';
+    var params = 'resizable=no,status=no,location=no,toolbar=no,menubar=no,scrollbars=no,location=no,width=600,height=500,left=300,top=200';
     window.open('http://127.0.0.1:5501/config.html', 'config', params);
 });
 // GET FORM DATA
-var daForm = document.getElementById('config-form');
-var configData = new FormData(daForm);
+console.log(document.getElementById('sub-btn'));
+// const dataUrl: string = window.location.href;
+// console.log(dataUrl);
+var params = new URLSearchParams;
 var _loop_1 = function (i) {
     var numBtn = numBtns[i];
     numBtn.addEventListener('click', function () {
@@ -44,6 +52,8 @@ var _loop_1 = function (i) {
         // console.log(values);
     });
 };
+// const daForm: HTMLFormElement | null = document.getElementById('config-form');
+// const configData: FormData = new FormData(daForm);
 // push values listener
 for (var i = 0; i < numBtns.length; i++) {
     _loop_1(i);

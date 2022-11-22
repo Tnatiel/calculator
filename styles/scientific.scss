@@ -2,6 +2,7 @@
     display: none;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1.98fr repeat(4, 1fr);
+    border: solid 0.1rem;
 
     h4 {
         border-bottom: solid 0.1rem;

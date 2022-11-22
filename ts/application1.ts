@@ -28,28 +28,42 @@ byId('info').addEventListener('click', () => {
 byId('mode').addEventListener('click', () => {
     const screen: HTMLDivElement = byId('screen');
     if (screen.style.backgroundColor !== 'white') {
-        screen.style.backgroundColor = 'white'
+        // console.log(typeof(byId('wrap').classList))
+        
+        screen.style.backgroundColor = 'white';
         byId('mode').classList.remove('light-on');
     } else {
-        screen.style.backgroundColor = '#c0ffb8';
-        byId('mode').classList.add('light-on')
+        if (byId('body').classList.contains('dark-body')) {
+            screen.style.backgroundColor = '#83ff2350';
+        } else {
+            screen.style.backgroundColor = '#c0ffb8';
+            byId('mode').classList.add('light-on')
+        }
     }
 });
 
 // CONFIGUE PAGE
 
-
 // POPUP PAGE
 byId('settings').addEventListener('click', () => {
     console.log('why')
-    let params: string =  'resizable=no,status=no,location=no,toolbar=no,menubar=no,scrollbars=no,location=no,width=500,height=500,left=900,top=300'
+    let params: string =  'resizable=no,status=no,location=no,toolbar=no,menubar=no,scrollbars=no,location=no,width=600,height=500,left=300,top=200'
     window.open('http://127.0.0.1:5501/config.html', 'config', params)
 })
 
 // GET FORM DATA
 
-const daForm: HTMLFormElement | null = document.getElementById('config-form');
-const configData: FormData = new FormData(daForm);
+
+console.log(document.getElementById('sub-btn'))
+    // const dataUrl: string = window.location.href;
+    // console.log(dataUrl);
+
+
+let params = new URLSearchParams
+
+
+// const daForm: HTMLFormElement | null = document.getElementById('config-form');
+// const configData: FormData = new FormData(daForm);
 
  
 // push values listener

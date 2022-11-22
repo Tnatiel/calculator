@@ -17,12 +17,9 @@
                 <!-- TRY BULID -->
 
                 <h1 id="header">Customize the page as you please</h1>
-                <form action="post" id="config-form">
-                    <div class="labels">
+                <form method="get" id="config-form">
+                    <div class="labels color">
                         <label for="color-select">Please select a color:</label>
-                        <label for="font-select">Please select a font:</label>
-                    </div>
-                    <div class="selects">
                         <select name="colors" id="color-select">    
                             <option value="">--Choose a color--</option>
                             <option value="red">Red</option>
@@ -31,7 +28,10 @@
                             <option value="yellow">Yellow</option>
                             <option value="purple">Purple</option>
                         </select>
-                        <br>
+                    </div>
+
+                    <div class="labels font">
+                        <label for="font-select">Please select a font:</label>
                         <select name="font" id="font-select">
                             
                             <option value="">--Choose a font--</option>
@@ -48,7 +48,7 @@
                             <input type="checkbox" id="mode">
                             <span class="slider"></span>
                         </label>
-                        <button class="sub-btn"><input type="submit">Submit</button>
+                        <button id="sub-btn" class="sub-btn"><input type="submit">Submit</button>
                     </div>  
                 </form>
             </section>
