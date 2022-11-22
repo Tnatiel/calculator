@@ -5,54 +5,67 @@ class Calculator1 {
     firstOperand: string;
     secondOperand: string;
     action: string;
-    lastCalculated: number;
+    lastCalculated: string;
     state: string;
     screen: HTMLDivElement;
     constructor() {
         this.firstOperand = '';
         this.secondOperand = '';
         this.action = '';
-        this.lastCalculated = 0;
+        this.lastCalculated = '';
         this.state = 'Reg'
-        this.screen = calById('screen');
+        this.screen = byId('screen');
     }
 
     updateScreen(key: string) {
-        let temp: HTMLDivElement = calById('screen');
+        let temp: HTMLDivElement = byId('screen');
         temp.innerHTML += `${key}`
     } 
 
     parseNum (num:string): void {
         if (this.state === 'Reg') {
             const lastChar:string = this.screen.innerHTML.slice(-1)
-            if (num === '.' && !'+-/*'.includes(lastChar)){
-                console.log(lastChar)
-                console.log(!'+-/X'.includes(lastChar))
-                if (this.firstOperand.length > 0 && !this.firstOperand.includes(num)) {
+            const numStr: string = '1234567890';
+            if (num === '.' && numStr.includes(lastChar)){
+                if (this.firstOperand !== '' && this.firstOperand.includes(num) === false) {
                     this.firstOperand += num;
                     this.updateScreen(num);
-                } else if (this.secondOperand.length > 0 && !this.secondOperand.includes(num)) {
+                } else if (this.secondOperand !== '' && this.secondOperand.includes(num) === false) {
                     this.secondOperand += num;
                     this.updateScreen(num);
-                }
-            } else if (this.action === '') {
+                } else {return}
+            } else if (this.action === '' && num !== '.') {
                 this.firstOperand += num;
                 this.updateScreen(num);
-            } else {this.secondOperand += num ; cal.updateScreen(num)}
+            } else if (num !== '.') {
+                this.secondOperand += num ; 
+                this.updateScreen(num);
+            }
         }
     }
 
     parseAction(oper:string) {
         if (this.state === 'Reg') {
-            console.log((this.screen.innerHTML.slice(-1)))
-            // console.log(typeof(this.screen.innerText[-1]))
             const lastChar:string = this.screen.innerHTML.slice(-1)
-            if (lastChar === '' || lastChar == '.') return
-            if ('+-/*'.includes(lastChar)) {
+            if (lastChar === '' || lastChar == '.') {return
+            } else if ('+-/*'.includes(lastChar)) {
                 this.screen.innerHTML = this.screen.innerHTML.slice(0,-1); 
                 this.updateScreen(oper);
-            } else {this.screen.innerHTML += oper;}
-            this.action = oper;
+            } else if (this.firstOperand !== '' && this.secondOperand !== ''){
+                console.log(`first op: ${this.firstOperand} sec op: ${this.secondOperand}`)
+                this.calculate();
+                byId('screen').innerHTML = this.lastCalculated;
+            } else {
+                this.action = oper
+                this.updateScreen(this.action)
+            }}}
+
+    calculate() {
+        if (this.state === 'Reg') {
+            let res: string = eval(this.firstOperand + this.action + this.secondOperand);
+            this.lastCalculated = res;
+            this.firstOperand = res;
+            this.action = res;
         }
     }
 }
@@ -95,10 +108,10 @@ byId('mode').addEventListener('click', () => {
         byId('mode').classList.remove('light-on');
     } else {
         if (byId('body').classList.contains('dark-body')) {
-            screen.style.backgroundColor = '#83ff2350';
+            screen.style.backgroundColor = '#3a5137';
         } else {
             screen.style.backgroundColor = '#c0ffb8';
-            byId('mode').classList.add('light-on')
+            byId('mode').classList.add('light-on');
         }
     }
 });
@@ -112,24 +125,24 @@ byId('mode').addEventListener('click', () => {
 // }
 
 // POPUP PAGE
-const dBase = localStorage.setItem('color', 'font')
+// const dBase = localStorage.setItem('color', 'font')
 // byId('settings').addEventListener('click', getParams, () => {
-    // let params: string =  'resizable=no,status=no,location=no,toolbar=no,menubar=no,scrollbars=no,location=no,width=600,height=500,left=300,top=200'
-    // window.open('http://127.0.0.1:5501/config.html', 'config', params)
-    // window.open('/config.html');
-    // getParams(window.location.href);
+//     // let params: string =  'resizable=no,status=no,location=no,toolbar=no,menubar=no,scrollbars=no,location=no,width=600,height=500,left=300,top=200'
+//     // window.open('http://127.0.0.1:5501/config.html', 'config', params)
+//     // window.open('/config.html');
+//     // getParams(window.location.href);
 
 
 
-// GET FORM DATA
-// console.log(document.querySelector('.sub-btn'));
+// // GET FORM DATA
+// // console.log(document.querySelector('.sub-btn'));
 
-    // const dataUrl: string = window.location.href;
-    // console.log(dataUrl);
+//     // const dataUrl: string = window.location.href;
+//     // console.log(dataUrl);
 
 
-let params = new URLSearchParams('/config.html')
-console.log(params)
+// let params = new URLSearchParams('/config.html')
+// console.log(params)
 
 
 // const daForm: HTMLFormElement | null = document.getElementById('config-form');
@@ -141,25 +154,35 @@ console.log(params)
 for (let i = 0; i < numBtns.length; i++) {
     const numBtn: HTMLButtonElement = numBtns[i]
     numBtn.addEventListener('click', () => {
+        console.log(`screen text: ${byId('screen').innerHTML}`)
+        console.log(`last val: ${cal.lastCalculated}`)
+        if (byId('screen').innerHTML == cal.lastCalculated){
+            byId('screen').innerHTML = ''
+        }
         cal.parseNum(numBtn.id);
-        values.push(numBtn.id);
-        // console.log(values);
+
     });
 }
 for (let j = 0; j < operBtns.length; j++) {
     const operBtn: HTMLButtonElement = operBtns[j]
     operBtn.addEventListener('click', () => {
     cal.parseAction(operBtn.id);
-    values.push(operBtn.id);
-    // console.log(values)
     });
 }
+
+byId("=").addEventListener('click', () => {
+    if (cal.firstOperand !== '' && cal.action !== '' && cal.secondOperand !== ''){
+        cal.calculate();
+        byId('screen').innerHTML = cal.lastCalculated;
+    }
+
+})
 
 // SCIENCE
 
 byId('sci').addEventListener('click', displayScienceSec)
 
-function displayScienceSec():undefined {
+function displayScienceSec(): void {
     if (byId('scientific-sec').style.display === 'none' || byId('scientific-sec').style.display === ''){
         byId('scientific-sec').style.display = 'grid'
         byId('main-c').style.borderRight = 'none'
@@ -175,7 +198,7 @@ function displayScienceSec():undefined {
 // HISTORY
 byId('history-btn').addEventListener('click', displayHistorySec)
 
-function displayHistorySec() {
+function displayHistorySec(): void {
     if (byId('history-sec').style.display === 'none' || byId('history-sec').style.display === ''){
         byId('history-sec').style.display = 'grid'
         byId('main-c').style.borderLeft = 'none'

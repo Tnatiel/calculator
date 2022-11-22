@@ -69,8 +69,8 @@ svg path{
     background-color: #cef7c9;
     display: flex;
     align-items: flex-end;
-    padding-left: 1rem;
-    font-size: 3rem;
+    padding-left: 1vw;
+    font-size: 2vw;
 }
 
 
@@ -174,43 +174,56 @@ body {
 
 
 .dark-body {
-    display: flex;
-    justify-content: center;
-
-    #wrap {
-        display: grid;
-        grid-template-columns: 1fr 2fr 1fr;
-        position: relative;
-        top: 4rem;
-        width: 90%;
-        height: 100%;
-    }
-
+    color: $d-font-color;   
     #scientific-sec {
         background-color: #f3053c69;
-        @include sci-sec
     }
     
     #history-sec {
         background-color: #83ff2350;
-        @include history-sec
     }
 
-    #main-c {
-        background-color: black;
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-        grid-template-rows: repeat(7, 1fr);
-        grid-column: 2/-2;
-        gap: 0.1rem;
-        border: solid 0.1rem;
-        height: 75vh;
-    
 
+    // IMG CONTROLS
+    svg path{
+        fill: $d-font-color;
+    }
+
+    // HEADER
+    #cal-header {
+        background-color: $d-ops-color;
+        // color: $d-font-color;
+    }
+
+    .wider h3{
+        color: $d-font-color;
+    }
+
+    // SCREEN
+    #screen {
+        background-color: #3a5137;
+        color: $d-font-color;
+    }      
+
+    #main-c {
+        background-color: rgb(171, 170, 170);
+
+        // BUTTONS
+
+        button.btn-num {
+            background-color: $d-prim-color;
+            color: $d-font-color;
+
+            &:hover{
+                background: linear-gradient(to bottom, #8b2851 5%, #6d4456 100%);
+                background-color: #030b2c;
+            }
+        }
+    
         & .btn-control, .opers {
             background-color: $d-ops-color;
-            font-size: 2rem;
-            @include btn;
+            color: $d-font-color;
+
             
             &:hover {
                 background: linear-gradient(to bottom, #4f0826 5%, #b12f65 100%);
@@ -220,7 +233,6 @@ body {
 
         & button.light-on {
             background-color: #f4ac28;
-            @include btn;
             &:hover {
                 background: linear-gradient(to bottom, #ffca67 5%, #e6b967 100%);
                 background-color: #c2cdf7;
@@ -234,62 +246,11 @@ body {
         // EQUAL BUTTON
 
         & button[id='='] {
-            @include btn;
             background-color: $d-eq-color;
             &:hover {
             background:linear-gradient(to bottom, #1e406a 5%, #376399 100%);
             background-color:#5b4d55;
             }
-        }
-
-        // IMG CONTROLS
-        svg path{
-            fill: $d-font-color;
-        }
-
-
-        .control-imgs {
-            height: 5vh;
-            width: 4vw;
-        }
-
-        // HEADER
-        #cal-header {
-            background-color: $d-ops-color;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: $d-font-color;
-        }
-
-        .wider h3{
-            font-size: 3vw;
-            color: $d-font-color;
-            align-self: center;
-        }
-
-        // SCREEN
-
-        #screen {
-            background-color: #3a5137;;
-            display: flex;
-            align-items: flex-end;
-            padding-left: 1rem;
-            font-size: 3rem;
-        }
-
-        // .wider {
-        //     grid-column: 2/ -2;
-        // }
-
-        button.btn-num {
-            @include btn;
-            background-color: $d-prim-color;
-
-            &:hover{
-                background: linear-gradient(to bottom, #8b2851 5%, #6d4456 100%);
-                background-color: #030b2c;
-    }
         }
     }
 }

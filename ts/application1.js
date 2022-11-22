@@ -3,54 +3,68 @@ var Calculator1 = /** @class */ (function () {
         this.firstOperand = '';
         this.secondOperand = '';
         this.action = '';
-        this.lastCalculated = 0;
+        this.lastCalculated = '';
         this.state = 'Reg';
-        this.screen = calById('screen');
+        this.screen = byId('screen');
     }
     Calculator1.prototype.updateScreen = function (key) {
-        var temp = calById('screen');
+        var temp = byId('screen');
         temp.innerHTML += "".concat(key);
     };
     Calculator1.prototype.parseNum = function (num) {
         if (this.state === 'Reg') {
             var lastChar = this.screen.innerHTML.slice(-1);
-            if (num === '.' && !'+-/*'.includes(lastChar)) {
-                console.log(lastChar);
-                console.log(!'+-/X'.includes(lastChar));
-                if (this.firstOperand.length > 0 && !this.firstOperand.includes(num)) {
+            var numStr = '1234567890';
+            if (num === '.' && numStr.includes(lastChar)) {
+                if (this.firstOperand !== '' && this.firstOperand.includes(num) === false) {
                     this.firstOperand += num;
                     this.updateScreen(num);
                 }
-                else if (this.secondOperand.length > 0 && !this.secondOperand.includes(num)) {
+                else if (this.secondOperand !== '' && this.secondOperand.includes(num) === false) {
                     this.secondOperand += num;
                     this.updateScreen(num);
                 }
+                else {
+                    return;
+                }
             }
-            else if (this.action === '') {
+            else if (this.action === '' && num !== '.') {
                 this.firstOperand += num;
                 this.updateScreen(num);
             }
-            else {
+            else if (num !== '.') {
                 this.secondOperand += num;
-                cal.updateScreen(num);
+                this.updateScreen(num);
             }
         }
     };
     Calculator1.prototype.parseAction = function (oper) {
         if (this.state === 'Reg') {
-            console.log((this.screen.innerHTML.slice(-1)));
-            // console.log(typeof(this.screen.innerText[-1]))
             var lastChar = this.screen.innerHTML.slice(-1);
-            if (lastChar === '' || lastChar == '.')
+            if (lastChar === '' || lastChar == '.') {
                 return;
-            if ('+-/*'.includes(lastChar)) {
+            }
+            else if ('+-/*'.includes(lastChar)) {
                 this.screen.innerHTML = this.screen.innerHTML.slice(0, -1);
                 this.updateScreen(oper);
             }
-            else {
-                this.screen.innerHTML += oper;
+            else if (this.firstOperand !== '' && this.secondOperand !== '') {
+                console.log("first op: ".concat(this.firstOperand, " sec op: ").concat(this.secondOperand));
+                this.calculate();
+                byId('screen').innerHTML = this.lastCalculated;
             }
-            this.action = oper;
+            else {
+                this.action = oper;
+                this.updateScreen(this.action);
+            }
+        }
+    };
+    Calculator1.prototype.calculate = function () {
+        if (this.state === 'Reg') {
+            var res = eval(this.firstOperand + this.action + this.secondOperand);
+            this.lastCalculated = res;
+            this.firstOperand = res;
+            this.action = res;
         }
     };
     return Calculator1;
@@ -80,7 +94,7 @@ byId('mode').addEventListener('click', function () {
     }
     else {
         if (byId('body').classList.contains('dark-body')) {
-            screen.style.backgroundColor = '#83ff2350';
+            screen.style.backgroundColor = '#3a5137';
         }
         else {
             screen.style.backgroundColor = '#c0ffb8';
@@ -88,6 +102,17 @@ byId('mode').addEventListener('click', function () {
         }
     }
 });
+var _loop_1 = function (i) {
+    var numBtn = numBtns[i];
+    numBtn.addEventListener('click', function () {
+        console.log("screen text: ".concat(byId('screen').innerHTML));
+        console.log("last val: ".concat(cal.lastCalculated));
+        if (byId('screen').innerHTML == cal.lastCalculated) {
+            byId('screen').innerHTML = '';
+        }
+        cal.parseNum(numBtn.id);
+    });
+};
 // CONFIGUE PAGE
 // function getParams(url: string): any {
 //     let params = new searc (url).searchParams;
@@ -95,26 +120,18 @@ byId('mode').addEventListener('click', function () {
 //     console.log(relvantData);
 // }
 // POPUP PAGE
-var dBase = localStorage.setItem('color', 'font');
+// const dBase = localStorage.setItem('color', 'font')
 // byId('settings').addEventListener('click', getParams, () => {
-// let params: string =  'resizable=no,status=no,location=no,toolbar=no,menubar=no,scrollbars=no,location=no,width=600,height=500,left=300,top=200'
-// window.open('http://127.0.0.1:5501/config.html', 'config', params)
-// window.open('/config.html');
-// getParams(window.location.href);
-// GET FORM DATA
-// console.log(document.querySelector('.sub-btn'));
-// const dataUrl: string = window.location.href;
-// console.log(dataUrl);
-var params = new URLSearchParams('/config.html');
-console.log(params);
-var _loop_1 = function (i) {
-    var numBtn = numBtns[i];
-    numBtn.addEventListener('click', function () {
-        cal.parseNum(numBtn.id);
-        values.push(numBtn.id);
-        // console.log(values);
-    });
-};
+//     // let params: string =  'resizable=no,status=no,location=no,toolbar=no,menubar=no,scrollbars=no,location=no,width=600,height=500,left=300,top=200'
+//     // window.open('http://127.0.0.1:5501/config.html', 'config', params)
+//     // window.open('/config.html');
+//     // getParams(window.location.href);
+// // GET FORM DATA
+// // console.log(document.querySelector('.sub-btn'));
+//     // const dataUrl: string = window.location.href;
+//     // console.log(dataUrl);
+// let params = new URLSearchParams('/config.html')
+// console.log(params)
 // const daForm: HTMLFormElement | null = document.getElementById('config-form');
 // const configData: FormData = new FormData(daForm);
 // push values listener
@@ -125,13 +142,17 @@ var _loop_2 = function (j) {
     var operBtn = operBtns[j];
     operBtn.addEventListener('click', function () {
         cal.parseAction(operBtn.id);
-        values.push(operBtn.id);
-        // console.log(values)
     });
 };
 for (var j = 0; j < operBtns.length; j++) {
     _loop_2(j);
 }
+byId("=").addEventListener('click', function () {
+    if (cal.firstOperand !== '' && cal.action !== '' && cal.secondOperand !== '') {
+        cal.calculate();
+        byId('screen').innerHTML = cal.lastCalculated;
+    }
+});
 // SCIENCE
 byId('sci').addEventListener('click', displayScienceSec);
 function displayScienceSec() {
