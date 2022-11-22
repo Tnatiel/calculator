@@ -1,3 +1,60 @@
+var Calculator1 = /** @class */ (function () {
+    function Calculator1() {
+        this.firstOperand = '';
+        this.secondOperand = '';
+        this.action = '';
+        this.lastCalculated = 0;
+        this.state = 'Reg';
+        this.screen = calById('screen');
+    }
+    Calculator1.prototype.updateScreen = function (key) {
+        var temp = calById('screen');
+        temp.innerHTML += "".concat(key);
+    };
+    Calculator1.prototype.parseNum = function (num) {
+        if (this.state === 'Reg') {
+            var lastChar = this.screen.innerHTML.slice(-1);
+            if (num === '.' && !'+-/*'.includes(lastChar)) {
+                console.log(lastChar);
+                console.log(!'+-/X'.includes(lastChar));
+                if (this.firstOperand.length > 0 && !this.firstOperand.includes(num)) {
+                    this.firstOperand += num;
+                    this.updateScreen(num);
+                }
+                else if (this.secondOperand.length > 0 && !this.secondOperand.includes(num)) {
+                    this.secondOperand += num;
+                    this.updateScreen(num);
+                }
+            }
+            else if (this.action === '') {
+                this.firstOperand += num;
+                this.updateScreen(num);
+            }
+            else {
+                this.secondOperand += num;
+                cal.updateScreen(num);
+            }
+        }
+    };
+    Calculator1.prototype.parseAction = function (oper) {
+        if (this.state === 'Reg') {
+            console.log((this.screen.innerHTML.slice(-1)));
+            // console.log(typeof(this.screen.innerText[-1]))
+            var lastChar = this.screen.innerHTML.slice(-1);
+            if (lastChar === '' || lastChar == '.')
+                return;
+            if ('+-/*'.includes(lastChar)) {
+                this.screen.innerHTML = this.screen.innerHTML.slice(0, -1);
+                this.updateScreen(oper);
+            }
+            else {
+                this.screen.innerHTML += oper;
+            }
+            this.action = oper;
+        }
+    };
+    return Calculator1;
+}());
 // SHORTCUTS
 var byId = document.getElementById.bind(document);
 var byClass = document.getElementsByClassName.bind(document);
@@ -7,7 +64,7 @@ var byClass = document.getElementsByClassName.bind(document);
 var numBtns = byClass('btn-num');
 var values = [];
 var operBtns = byClass('opers');
-var cal = new Calculator(values);
+var cal = new Calculator1();
 // INFO FUCNTION
 // const infoBtn: HTMLButtonElement = byId('info')
 byId('info').addEventListener('click', function () {
@@ -32,22 +89,28 @@ byId('mode').addEventListener('click', function () {
     }
 });
 // CONFIGUE PAGE
+// function getParams(url: string): any {
+//     let params = new searc (url).searchParams;
+//     let relvantData = [params.get('font'), params.get('color'), params.get('mode')] ;
+//     console.log(relvantData);
+// }
 // POPUP PAGE
-byId('settings').addEventListener('click', function () {
-    console.log('why');
-    var params = 'resizable=no,status=no,location=no,toolbar=no,menubar=no,scrollbars=no,location=no,width=600,height=500,left=300,top=200';
-    window.open('http://127.0.0.1:5501/config.html', 'config', params);
-});
+var dBase = localStorage.setItem('color', 'font');
+// byId('settings').addEventListener('click', getParams, () => {
+// let params: string =  'resizable=no,status=no,location=no,toolbar=no,menubar=no,scrollbars=no,location=no,width=600,height=500,left=300,top=200'
+// window.open('http://127.0.0.1:5501/config.html', 'config', params)
+// window.open('/config.html');
+// getParams(window.location.href);
 // GET FORM DATA
-console.log(document.getElementById('sub-btn'));
+// console.log(document.querySelector('.sub-btn'));
 // const dataUrl: string = window.location.href;
 // console.log(dataUrl);
-var params = new URLSearchParams;
+var params = new URLSearchParams('/config.html');
+console.log(params);
 var _loop_1 = function (i) {
     var numBtn = numBtns[i];
     numBtn.addEventListener('click', function () {
-        cal.updateScreen(numBtn.id);
-        // cal.ParseKey();
+        cal.parseNum(numBtn.id);
         values.push(numBtn.id);
         // console.log(values);
     });
@@ -61,7 +124,7 @@ for (var i = 0; i < numBtns.length; i++) {
 var _loop_2 = function (j) {
     var operBtn = operBtns[j];
     operBtn.addEventListener('click', function () {
-        cal.updateScreen(operBtn.id);
+        cal.parseAction(operBtn.id);
         values.push(operBtn.id);
         // console.log(values)
     });

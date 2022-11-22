@@ -20,7 +20,7 @@
                 <form method="get" id="config-form">
                     <div class="labels color">
                         <label for="color-select">Please select a color:</label>
-                        <select name="colors" id="color-select">    
+                        <select name="color" id="color-select">    
                             <option value="">--Choose a color--</option>
                             <option value="red">Red</option>
                             <option value="green">Green</option>
@@ -37,17 +37,19 @@
                             <option value="">--Choose a font--</option>
                             <option value="alegreya-sc">Alegreya SC</option>
                             <option value="archivo-Narrow">Archivo Narrow</option>
-                            <option value="concert One">Concert One</option>
+                            <option value="concert-one">Concert One</option>
                             <option value="source-Code-Pro">Source Code Pro</option>
                             <option value="amatic-sc">Amatic SC</option>
                         </select>
                     </div>
                     <div class="mode">
-                        <label class="labels" for="mode">Choose mode:</label>
-                        <label class="switch">
-                            <input type="checkbox" id="mode">
-                            <span class="slider"></span>
-                        </label>
+                        <!-- DARK -->
+                        <label class="labels" for="mode">Dark mode:</label>
+                        <input type="radio" value="dark" name="mode" id="dark">
+                        
+                        <!-- LIGHT -->
+                        <label class="labels" for="mode">Light mode:</label>
+                        <input type="radio" value="light" name="mode" id="light">
                         <button id="sub-btn" class="sub-btn"><input type="submit">Submit</button>
                     </div>  
                 </form>

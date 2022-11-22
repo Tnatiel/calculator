@@ -1,4 +1,65 @@
 
+
+class Calculator1 {
+
+    firstOperand: string;
+    secondOperand: string;
+    action: string;
+    lastCalculated: number;
+    state: string;
+    screen: HTMLDivElement;
+    constructor() {
+        this.firstOperand = '';
+        this.secondOperand = '';
+        this.action = '';
+        this.lastCalculated = 0;
+        this.state = 'Reg'
+        this.screen = calById('screen');
+    }
+
+    updateScreen(key: string) {
+        let temp: HTMLDivElement = calById('screen');
+        temp.innerHTML += `${key}`
+    } 
+
+    parseNum (num:string): void {
+        if (this.state === 'Reg') {
+            const lastChar:string = this.screen.innerHTML.slice(-1)
+            if (num === '.' && !'+-/*'.includes(lastChar)){
+                console.log(lastChar)
+                console.log(!'+-/X'.includes(lastChar))
+                if (this.firstOperand.length > 0 && !this.firstOperand.includes(num)) {
+                    this.firstOperand += num;
+                    this.updateScreen(num);
+                } else if (this.secondOperand.length > 0 && !this.secondOperand.includes(num)) {
+                    this.secondOperand += num;
+                    this.updateScreen(num);
+                }
+            } else if (this.action === '') {
+                this.firstOperand += num;
+                this.updateScreen(num);
+            } else {this.secondOperand += num ; cal.updateScreen(num)}
+        }
+    }
+
+    parseAction(oper:string) {
+        if (this.state === 'Reg') {
+            console.log((this.screen.innerHTML.slice(-1)))
+            // console.log(typeof(this.screen.innerText[-1]))
+            const lastChar:string = this.screen.innerHTML.slice(-1)
+            if (lastChar === '' || lastChar == '.') return
+            if ('+-/*'.includes(lastChar)) {
+                this.screen.innerHTML = this.screen.innerHTML.slice(0,-1); 
+                this.updateScreen(oper);
+            } else {this.screen.innerHTML += oper;}
+            this.action = oper;
+        }
+    }
+}
+
+
+
+
 // SHORTCUTS
 const byId = document.getElementById.bind(document);
 const byClass = document.getElementsByClassName.bind(document);
@@ -13,7 +74,7 @@ const operBtns: HTMLButtonElement[] = byClass('opers');
 
 
 
-const cal = new Calculator(values)
+const cal = new Calculator1()
 
 // INFO FUCNTION
 // const infoBtn: HTMLButtonElement = byId('info')
@@ -44,22 +105,31 @@ byId('mode').addEventListener('click', () => {
 
 // CONFIGUE PAGE
 
+// function getParams(url: string): any {
+//     let params = new searc (url).searchParams;
+//     let relvantData = [params.get('font'), params.get('color'), params.get('mode')] ;
+//     console.log(relvantData);
+// }
+
 // POPUP PAGE
-byId('settings').addEventListener('click', () => {
-    console.log('why')
-    let params: string =  'resizable=no,status=no,location=no,toolbar=no,menubar=no,scrollbars=no,location=no,width=600,height=500,left=300,top=200'
-    window.open('http://127.0.0.1:5501/config.html', 'config', params)
-})
+const dBase = localStorage.setItem('color', 'font')
+// byId('settings').addEventListener('click', getParams, () => {
+    // let params: string =  'resizable=no,status=no,location=no,toolbar=no,menubar=no,scrollbars=no,location=no,width=600,height=500,left=300,top=200'
+    // window.open('http://127.0.0.1:5501/config.html', 'config', params)
+    // window.open('/config.html');
+    // getParams(window.location.href);
+
+
 
 // GET FORM DATA
+// console.log(document.querySelector('.sub-btn'));
 
-
-console.log(document.getElementById('sub-btn'))
     // const dataUrl: string = window.location.href;
     // console.log(dataUrl);
 
 
-let params = new URLSearchParams
+let params = new URLSearchParams('/config.html')
+console.log(params)
 
 
 // const daForm: HTMLFormElement | null = document.getElementById('config-form');
@@ -71,8 +141,7 @@ let params = new URLSearchParams
 for (let i = 0; i < numBtns.length; i++) {
     const numBtn: HTMLButtonElement = numBtns[i]
     numBtn.addEventListener('click', () => {
-        cal.updateScreen(numBtn.id);
-        // cal.ParseKey();
+        cal.parseNum(numBtn.id);
         values.push(numBtn.id);
         // console.log(values);
     });
@@ -80,7 +149,7 @@ for (let i = 0; i < numBtns.length; i++) {
 for (let j = 0; j < operBtns.length; j++) {
     const operBtn: HTMLButtonElement = operBtns[j]
     operBtn.addEventListener('click', () => {
-    cal.updateScreen(operBtn.id)
+    cal.parseAction(operBtn.id);
     values.push(operBtn.id);
     // console.log(values)
     });
