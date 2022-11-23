@@ -246,7 +246,7 @@ function displayScienceSec(): void {
         // cal.state = 'Sci'
     } else { 
         byId('scientific-sec').style.display = 'none';
-        byId('main-c').style.borderRight = 'solid';
+        byId('main-c').style.borderRight = 'solid 0.1rem';
         // cal.state = 'Reg'
     }
     return
@@ -266,7 +266,9 @@ function displayHistorySec(): void {
         
     } else { 
         byId('history-sec').style.display = 'none';
-        byId('main-c').style.borderLeft = 'solid';
+        if (screen.width > 810) {
+            byId('main-c').style.borderLeft = 'solid 0.1rem';
+        }
     }
     
 }

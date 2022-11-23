@@ -1,7 +1,7 @@
 @mixin history-sec {
     grid-column: 1/ 2;
     grid-row: 1;
-    border: solid;
+    border: solid 0.1rem;
     display: none;
     grid-template-rows: 0.1fr 3fr;   
      h4 { 
