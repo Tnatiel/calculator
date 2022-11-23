@@ -8,7 +8,7 @@
         border-bottom: solid 0.1rem;
         display: inline-block;
         text-align: center;
-        padding-top: 1.6rem;
+        padding-top: 0.6rem;
         grid-column: 1/-1;
         font-size: 1.5rem;
     }
@@ -24,10 +24,11 @@
         cursor:pointer;
         color:$font-color;
         font-family:Arial;
-        font-size: 1.8rem;
+        font-size: 1.5rem;
         font-weight:bold;
         text-decoration:none;
         text-shadow: 0 0.001rem 0 #766a6a;
+        border-top: solid 0.1rem;
         
         &:active {
             position:relative;

@@ -1,0 +1,72 @@
+
+$ipad-air: 820px;
+$galaxy-3: 365px;
+
+// @function size-adapts($screen-size) {
+//     if width: >= $screen-s;
+// }
+
+@mixin ipad-air {
+
+    .control-imgs {
+        height: 2.5vh; 
+        padding: 0.5rem 0 0;
+        width: 1.5rem;  // (numbers too)
+    }
+    
+    #wrap {
+        display: flex;
+        grid-template-columns: 1fr 2fr 1fr;
+        position: relative;
+        top: 2vh;
+        width: 90%;
+        flex-direction: column;
+    }
+
+    #main {
+        border: solid 0.5rem;
+    }
+
+    .wider h3 {
+        font-size: 1rem;
+        font-weight: 700;
+    }
+        
+}
+
+@mixin galaxy-3 {
+
+    .control-imgs {
+        height: 2.5vh; 
+        padding: 0.5rem 0 0;
+        width: 1.5rem;  // (numbers too)
+    }
+    
+    #wrap {
+        display: flex;
+        grid-template-columns: 1fr 2fr 1fr;
+        position: relative;
+        top: 2vh;
+        width: 90%;
+        flex-direction: column;
+    }
+
+    #main {
+        border: solid 0.5rem;
+    }
+
+    .wider h3 {
+        font-size: 1rem;
+        font-weight: 700;
+    }
+
+    button.btn-num {
+        font-size: 1rem;
+    }
+
+    #main-c .btn-control, #main-c .opers {
+        font-size: 1rem;
+    }
+        
+}
+    

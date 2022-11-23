@@ -117,7 +117,7 @@ var values = [];
 var operBtns = byClass('opers');
 var cal = new Calculator111();
 // INFO FUCNTION
-// const infoBtn: HTMLButtonElement = byId('info')
+var infoBtn = byId('info');
 byId('info').addEventListener('click', function () {
     alert("        Developers name: Natiel\n        Calculator version: 1\n        Description: A web calculator based on javascript, scss and html\n    ");
 });
@@ -136,11 +136,12 @@ byId('mode').addEventListener('click', function () {
 // }
 // POPUP PAGE
 // const dBase = localStorage.setItem('color', 'font')
-// byId('settings').addEventListener('click', getParams, () => {
-//     // let params: string =  'resizable=no,status=no,location=no,toolbar=no,menubar=no,scrollbars=no,location=no,width=600,height=500,left=300,top=200'
-//     // window.open('http://127.0.0.1:5501/config.html', 'config', params)
-//     // window.open('/config.html');
-//     // getParams(window.location.href);
+byId('settings').addEventListener('click', function () {
+    var params = 'resizable=no,status=no,location=no,toolbar=no,menubar=no,scrollbars=no,location=no,width=600,height=500,left=300,top=200';
+    // window.open('http://127.0.0.1:5501/config.html', 'config', params)
+    window.open('/config.html', 'config', params);
+    ;
+});
 // // GET FORM DATA
 // // console.log(document.querySelector('.sub-btn'));
 //     // const dataUrl: string = window.location.href;
@@ -149,12 +150,13 @@ byId('mode').addEventListener('click', function () {
 // console.log(params)
 // const daForm: HTMLFormElement | null = document.getElementById('config-form');
 // const configData: FormData = new FormData(daForm);
-// HANDLE BTNS CLICKS
-// NUMBER BUTTONS
+//   HANDLAING KEYBOARD
+// NUMBER PAD
 document.addEventListener('keyup', function (evt) {
     console.log('hello');
     console.log(evt.code);
-    if ('1234567890'.includes(evt.code.slice(-1))) {
+    if (evt.code >= 'Numpad0' || evt.code >= 'Numpad0') {
+        // if ('1234567890'.includes(evt.code.slice(-1))) 
         cal.parseNum(evt.code.slice(-1));
     }
     evt.stopPropagation();
@@ -169,6 +171,8 @@ var _loop_1 = function (i) {
         cal.parseNum(numBtn.id);
     });
 };
+// HANDLE BTNS CLICKS
+// NUMBER BUTTONS
 for (var i = 0; i < numBtns.length; i++) {
     _loop_1(i);
 }
@@ -197,11 +201,12 @@ byId('return').addEventListener('click', function () {
     cal.deleteLastKey();
 });
 // SCIENCE
-byId('sci').addEventListener('click', displayScienceSec);
 function displayScienceSec() {
     if (byId('scientific-sec').style.display === 'none' || byId('scientific-sec').style.display === '') {
         byId('scientific-sec').style.display = 'grid';
-        byId('main-c').style.borderRight = 'none';
+        if (screen.width > 810) {
+            byId('main-c').style.borderRight = 'none';
+        }
         // cal.state = 'Sci'
     }
     else {
@@ -211,15 +216,18 @@ function displayScienceSec() {
     }
     return;
 }
+byId('sci').addEventListener('click', displayScienceSec);
 // HISTORY
-byId('history-btn').addEventListener('click', displayHistorySec);
 function displayHistorySec() {
     if (byId('history-sec').style.display === 'none' || byId('history-sec').style.display === '') {
         byId('history-sec').style.display = 'grid';
-        byId('main-c').style.borderLeft = 'none';
+        if (screen.width > 810) {
+            byId('main-c').style.borderLeft = 'none';
+        }
     }
     else {
         byId('history-sec').style.display = 'none';
         byId('main-c').style.borderLeft = 'solid';
     }
 }
+byId('history-btn').addEventListener('click', displayHistorySec);

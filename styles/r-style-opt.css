@@ -9,8 +9,9 @@ svg path {
 }
 
 .control-imgs {
-  height: 5vh;
-  width: 4vw;
+  height: 4vh;
+  padding: 0.5rem 0 0;
+  width: 2.5vw;
 }
 
 #cal-header {
@@ -46,7 +47,7 @@ button.btn-num {
   display: inline-block;
   cursor: pointer;
   color: #232020;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
   text-shadow: 0 0.001rem 0 #766a6a;
@@ -68,7 +69,6 @@ button.btn-num:hover {
   grid-column: 2/-2;
   gap: 0.1rem;
   border: solid 0.1rem;
-  height: 75vh;
 }
 #main-c .btn-control, #main-c .opers {
   background-color: #c7d2fe;
@@ -76,7 +76,7 @@ button.btn-num:hover {
   display: inline-block;
   cursor: pointer;
   color: #232020;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
   text-shadow: 0 0.001rem 0 #766a6a;
@@ -94,7 +94,7 @@ button.btn-num:hover {
   display: inline-block;
   cursor: pointer;
   color: #232020;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
   text-shadow: 0 0.001rem 0 #766a6a;
@@ -114,7 +114,7 @@ button.btn-num:hover {
   display: inline-block;
   cursor: pointer;
   color: #232020;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
   text-shadow: 0 0.001rem 0 #766a6a;
@@ -156,7 +156,7 @@ button.btn-num:hover {
   border-bottom: solid 0.1rem;
   display: inline-block;
   text-align: center;
-  padding-top: 1.6rem;
+  padding-top: 0.6rem;
   grid-column: 1/-1;
   font-size: 1.5rem;
 }
@@ -171,10 +171,11 @@ button.btn-num:hover {
   cursor: pointer;
   color: #232020;
   font-family: Arial;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
   text-shadow: 0 0.001rem 0 #766a6a;
+  border-top: solid 0.1rem;
 }
 #scientific-sec .sci-btns:active {
   position: relative;
@@ -191,13 +192,63 @@ body {
 
 #wrap {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 0.8fr 2fr 0.8fr;
   position: relative;
   top: 4rem;
   width: 90%;
-  height: 100%;
+  height: 80vh;
 }
 
+@media screen and (width < 820px) {
+  .control-imgs {
+    height: 2.5vh;
+    padding: 0.5rem 0 0;
+    width: 1.5rem;
+  }
+  #wrap {
+    display: flex;
+    grid-template-columns: 1fr 2fr 1fr;
+    position: relative;
+    top: 2vh;
+    width: 90%;
+    flex-direction: column;
+  }
+  #main {
+    border: solid 0.5rem;
+  }
+  .wider h3 {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+}
+@media screen and (width < 365px) {
+  .control-imgs {
+    height: 2.5vh;
+    padding: 0.5rem 0 0;
+    width: 1.5rem;
+  }
+  #wrap {
+    display: flex;
+    grid-template-columns: 1fr 2fr 1fr;
+    position: relative;
+    top: 2vh;
+    width: 90%;
+    flex-direction: column;
+  }
+  #main {
+    border: solid 0.5rem;
+  }
+  .wider h3 {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  button.btn-num {
+    font-size: 1rem;
+  }
+  #main-c .btn-control, #main-c .opers {
+    font-size: 1rem;
+  }
+}
 .dark-body {
   color: #c7c4c4;
 }

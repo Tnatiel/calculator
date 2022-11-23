@@ -17,7 +17,7 @@
                 <!-- TRY BULID -->
 
                 <h1 id="header">Customize the page as you please</h1>
-                <form method="get" id="config-form">
+                <form method="get" action="/" id="config-form">
                     <div class="labels color">
                         <label for="color-select">Please select a color:</label>
                         <select name="color" id="color-select">    
@@ -35,7 +35,7 @@
                         <select name="font" id="font-select">
                             
                             <option value="">--Choose a font--</option>
-                            <option value="alegreya-sc">Alegreya SC</option>
+                            <option value="alegreya-sc" onclick="() => {console.log('hello')}">Alegreya SC</option>
                             <option value="archivo-Narrow">Archivo Narrow</option>
                             <option value="concert-one">Concert One</option>
                             <option value="source-Code-Pro">Source Code Pro</option>
@@ -50,10 +50,45 @@
                         <!-- LIGHT -->
                         <label class="labels" for="mode">Light mode:</label>
                         <input type="radio" value="light" name="mode" id="light">
-                        <button id="sub-btn" class="sub-btn"><input type="submit">Submit</button>
+                        <button id="sub" class="sub-btn"><input type="submit">Submit</button>
                     </div>  
                 </form>
             </section>
         </main>
+        <script>
+            document.getElementById('sub').addEventListener('click', () => {})
+            const opts = document.querySelectorAll('option');
+            for (const op of opts) {
+                if (op.value !== '') {
+                    op.addEventListener('click', () => {
+                        console.log('hello');
+                        console.log(op)
+                        console.log(op.value)
+                    })
+                }
+                console.log(op.value)
+            }
+            // localStorage[0] = 
+            
+            // document.getElementById('sub').addEventListener('click', (evt) => {
+            //     const http = new XMLHttpRequest();
+            //     http.open('GET', 'http://127.0.0.1:5501/config.html')
+            //     http.send()
+
+            //     http.onreadystatechange = (evt) => {
+            //         if(http.readyState == 4 && this.status == 200)
+            //             console.log(http.responseText);
+            //     }
+                // async () => {
+                //     const response = await fetch('/config.html')
+                //     response.json().then( data => {
+                //         console.log(data)
+                //         GET
+                //     })
+            // }
+                // const myStr = String(window.location);
+                // alert(myStr)
+            
+        </script>
     </body>
 </html>

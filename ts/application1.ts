@@ -124,7 +124,7 @@ const operBtns: HTMLButtonElement[] = byClass('opers');
 const cal = new Calculator111()
 
 // INFO FUCNTION
-// const infoBtn: HTMLButtonElement = byId('info')
+const infoBtn: HTMLButtonElement = byId('info')
 byId('info').addEventListener('click', () => {
     alert(`        Developers name: Natiel
         Calculator version: 1
@@ -142,6 +142,8 @@ byId('mode').addEventListener('click', () => {
 
 // CONFIGUE PAGE
 
+
+
 // function getParams(url: string): any {
 //     let params = new searc (url).searchParams;
 //     let relvantData = [params.get('font'), params.get('color'), params.get('mode')] ;
@@ -150,11 +152,11 @@ byId('mode').addEventListener('click', () => {
 
 // POPUP PAGE
 // const dBase = localStorage.setItem('color', 'font')
-// byId('settings').addEventListener('click', getParams, () => {
-//     // let params: string =  'resizable=no,status=no,location=no,toolbar=no,menubar=no,scrollbars=no,location=no,width=600,height=500,left=300,top=200'
-//     // window.open('http://127.0.0.1:5501/config.html', 'config', params)
-//     // window.open('/config.html');
-//     // getParams(window.location.href);
+byId('settings').addEventListener('click', () => {
+    let params: string =  'resizable=no,status=no,location=no,toolbar=no,menubar=no,scrollbars=no,location=no,width=600,height=500,left=300,top=200'
+    // window.open('http://127.0.0.1:5501/config.html', 'config', params)
+    window.open('/config.html','config', params);
+;})
 
 
 
@@ -172,20 +174,25 @@ byId('mode').addEventListener('click', () => {
 // const daForm: HTMLFormElement | null = document.getElementById('config-form');
 // const configData: FormData = new FormData(daForm);
 
- 
-// HANDLE BTNS CLICKS
+//   HANDLAING KEYBOARD
 
-// NUMBER BUTTONS
+// NUMBER PAD
 
 document.addEventListener('keyup', (evt): Event => {
     console.log('hello')
     console.log(evt.code);
-    if ('1234567890'.includes(evt.code.slice(-1))) {
+    if (evt.code >= 'Numpad0' || evt.code >= 'Numpad0'){
+    // if ('1234567890'.includes(evt.code.slice(-1))) 
         cal.parseNum(evt.code.slice(-1))
     }
     evt.stopPropagation()
     return evt
 })
+ 
+// HANDLE BTNS CLICKS
+
+// NUMBER BUTTONS
+
 
 for (let i = 0; i < numBtns.length; i++) {
     const numBtn: HTMLButtonElement = numBtns[i]
@@ -226,14 +233,16 @@ byId('c').addEventListener('click', cal.clearData)
 byId('return').addEventListener('click', () => {
     console.log(`fir op: ${cal.firstOperand}, sec op: ${cal.secondOperand}`)
     cal.deleteLastKey()})
-// SCIENCE
 
-byId('sci').addEventListener('click', displayScienceSec)
+
+// SCIENCE
 
 function displayScienceSec(): void {
     if (byId('scientific-sec').style.display === 'none' || byId('scientific-sec').style.display === ''){
         byId('scientific-sec').style.display = 'grid'
-        byId('main-c').style.borderRight = 'none'
+        if (screen.width > 810) {
+            byId('main-c').style.borderRight = 'none'
+        }
         // cal.state = 'Sci'
     } else { 
         byId('scientific-sec').style.display = 'none';
@@ -243,18 +252,23 @@ function displayScienceSec(): void {
     return
 }
 
+byId('sci').addEventListener('click', displayScienceSec)
+
+
 // HISTORY
-byId('history-btn').addEventListener('click', displayHistorySec)
 
 function displayHistorySec(): void {
     if (byId('history-sec').style.display === 'none' || byId('history-sec').style.display === ''){
         byId('history-sec').style.display = 'grid';
-        byId('main-c').style.borderLeft = 'none';
+        if (screen.width > 810) {
+            byId('main-c').style.borderLeft = 'none';
+        }
         
     } else { 
         byId('history-sec').style.display = 'none';
         byId('main-c').style.borderLeft = 'solid';
     }
-
+    
 }
 
+byId('history-btn').addEventListener('click', displayHistorySec)
