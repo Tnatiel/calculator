@@ -1,6 +1,4 @@
-
-
-class Calculator1 {
+class Calculator111 {
 
     firstOperand: string;
     secondOperand: string;
@@ -14,19 +12,23 @@ class Calculator1 {
         this.action = '';
         this.lastCalculated = '';
         this.state = 'Reg'
-        this.screen = byId('screen');
-    }
+        }
 
     updateScreen(key: string) {
         let temp: HTMLDivElement = byId('screen');
+        console.log(`UpScr given key: ${key}`)
         temp.innerHTML += `${key}`
     } 
 
     parseNum (num:string): void {
         if (this.state === 'Reg') {
-            const lastChar:string = this.screen.innerHTML.slice(-1)
+            const lastChar:string =  byId('screen').innerHTML.slice(-1)
             const numStr: string = '1234567890';
-            if (num === '.' && numStr.includes(lastChar)){
+            if (this.lastCalculated == byId('screen').innerHTML) {
+                this.clearData()
+                this.firstOperand += num
+                this.updateScreen(num)
+            } else if (num === '.' && numStr.includes(lastChar)){
                 if (this.firstOperand !== '' && this.firstOperand.includes(num) === false) {
                     this.firstOperand += num;
                     this.updateScreen(num);
@@ -46,14 +48,16 @@ class Calculator1 {
 
     parseAction(oper:string) {
         if (this.state === 'Reg') {
-            const lastChar:string = this.screen.innerHTML.slice(-1)
-            if (lastChar === '' || lastChar == '.') {return
+            const lastChar:string =  byId('screen').innerHTML.slice(-1);
+            if (lastChar === '' || lastChar == '.') {
+                return
             } else if ('+-/*'.includes(lastChar)) {
-                this.screen.innerHTML = this.screen.innerHTML.slice(0,-1); 
-                this.updateScreen(oper);
+                byId('screen').innerHTML = byId('screen').innerHTML.slice(0,-1); 
+                this.action = oper
+                this.updateScreen(this.action);
             } else if (this.firstOperand !== '' && this.secondOperand !== ''){
-                console.log(`first op: ${this.firstOperand} sec op: ${this.secondOperand}`)
                 this.calculate();
+                this.action = oper
                 byId('screen').innerHTML = this.lastCalculated;
             } else {
                 this.action = oper
@@ -62,14 +66,44 @@ class Calculator1 {
 
     calculate() {
         if (this.state === 'Reg') {
+            // console.log(`fir op: ${this.firstOperand} act: ${this.action} sec: ${this.secondOperand}`)
             let res: string = eval(this.firstOperand + this.action + this.secondOperand);
+            this.clearData();
             this.lastCalculated = res;
             this.firstOperand = res;
-            this.action = res;
+            // console.log(`fir op: ${this.firstOperand}`)
+            // this.action = res;
         }
     }
-}
 
+    clearData() {
+        this.firstOperand = '';
+        this.secondOperand = '';
+        this.action = '';
+        this.lastCalculated = '';
+        byId('screen').innerHTML = ''
+        
+    }
+
+    deleteLastKey() {
+
+        // console.log(`inner: ${(byId('screen').innerHTML)}`);
+        // console.log(`last cal: ${this.lastCalculated}`);
+        // console.log(`bool: ${byId('screen').innerHTML == this.lastCalculated}`);
+        const lastKey = byId('screen').innerHTML.slice(-1);
+        if (byId('screen').innerHTML.length < 1 || byId('screen').innerHTML == this.lastCalculated) {return}
+        else if (this.secondOperand !== '') {
+            // console.log(`fir op type: ${typeof(this.firstOperand)}`)
+            // console.log(`fir op: ${this.firstOperand}`)
+            this.secondOperand = this.secondOperand.slice(0,-1)
+        } else if ('+-/*'.includes(lastKey)){
+            this.action = ''
+        } else {this.firstOperand = this.firstOperand.slice(0, -1)}
+            
+        byId('screen').innerHTML = byId('screen').innerHTML.slice(0, -1);
+        
+    }
+}
 
 
 
@@ -87,7 +121,7 @@ const operBtns: HTMLButtonElement[] = byClass('opers');
 
 
 
-const cal = new Calculator1()
+const cal = new Calculator111()
 
 // INFO FUCNTION
 // const infoBtn: HTMLButtonElement = byId('info')
@@ -101,19 +135,9 @@ byId('info').addEventListener('click', () => {
 //  LIGHTS 
 byId('mode').addEventListener('click', () => {
     const screen: HTMLDivElement = byId('screen');
-    if (screen.style.backgroundColor !== 'white') {
-        // console.log(typeof(byId('wrap').classList))
-        
-        screen.style.backgroundColor = 'white';
-        byId('mode').classList.remove('light-on');
-    } else {
-        if (byId('body').classList.contains('dark-body')) {
-            screen.style.backgroundColor = '#3a5137';
-        } else {
-            screen.style.backgroundColor = '#c0ffb8';
-            byId('mode').classList.add('light-on');
-        }
-    }
+    console.log('togg')
+    byId('screen').classList.toggle('light-on-screen'); 
+    byId('mode').classList.toggle('light-on-btn');
 });
 
 // CONFIGUE PAGE
@@ -149,19 +173,32 @@ byId('mode').addEventListener('click', () => {
 // const configData: FormData = new FormData(daForm);
 
  
-// push values listener
+// HANDLE BTNS CLICKS
+
+// NUMBER BUTTONS
+
+document.addEventListener('keyup', (evt): Event => {
+    console.log('hello')
+    console.log(evt.code);
+    if ('1234567890'.includes(evt.code.slice(-1))) {
+        cal.parseNum(evt.code.slice(-1))
+    }
+    evt.stopPropagation()
+    return evt
+})
 
 for (let i = 0; i < numBtns.length; i++) {
     const numBtn: HTMLButtonElement = numBtns[i]
     numBtn.addEventListener('click', () => {
-        console.log(`screen text: ${byId('screen').innerHTML}`)
-        console.log(`last val: ${cal.lastCalculated}`)
         if (byId('screen').innerHTML == cal.lastCalculated){
             byId('screen').innerHTML = ''
         }
         cal.parseNum(numBtn.id);
+    })
 
-    });
+
+// OPER BUTTONS
+
 }
 for (let j = 0; j < operBtns.length; j++) {
     const operBtn: HTMLButtonElement = operBtns[j]
@@ -170,7 +207,9 @@ for (let j = 0; j < operBtns.length; j++) {
     });
 }
 
+// EQUAL BUTTON
 byId("=").addEventListener('click', () => {
+    console.log(`fir op: ${cal.firstOperand} sec op: ${cal.secondOperand}`)
     if (cal.firstOperand !== '' && cal.action !== '' && cal.secondOperand !== ''){
         cal.calculate();
         byId('screen').innerHTML = cal.lastCalculated;
@@ -178,6 +217,15 @@ byId("=").addEventListener('click', () => {
 
 })
 
+// C BUTTON
+
+byId('c').addEventListener('click', cal.clearData)
+
+// RETURN BUTTON
+
+byId('return').addEventListener('click', () => {
+    console.log(`fir op: ${cal.firstOperand}, sec op: ${cal.secondOperand}`)
+    cal.deleteLastKey()})
 // SCIENCE
 
 byId('sci').addEventListener('click', displayScienceSec)
@@ -200,13 +248,12 @@ byId('history-btn').addEventListener('click', displayHistorySec)
 
 function displayHistorySec(): void {
     if (byId('history-sec').style.display === 'none' || byId('history-sec').style.display === ''){
-        byId('history-sec').style.display = 'grid'
-        byId('main-c').style.borderLeft = 'none'
-        // cal.state = 'Sci'
+        byId('history-sec').style.display = 'grid';
+        byId('main-c').style.borderLeft = 'none';
+        
     } else { 
         byId('history-sec').style.display = 'none';
         byId('main-c').style.borderLeft = 'solid';
-        // cal.state = 'Reg'
     }
 
 }

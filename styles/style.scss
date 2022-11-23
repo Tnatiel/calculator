@@ -66,11 +66,15 @@ svg path{
 // SCREEN
 
 #screen {
-    background-color: #cef7c9;
+    background-color: #f6f6f6;
     display: flex;
     align-items: flex-end;
     padding-left: 1vw;
     font-size: 2vw;
+}
+
+#screen.light-on-screen {
+    background-color: #cef7c9;
 }
 
 
@@ -108,7 +112,7 @@ button.btn-num {
         @include btn;
     }
 
-    & button.light-on {
+    & button.light-on-btn {
         background-color: #f4ac28;
         @include btn;
         &:hover {
@@ -116,6 +120,7 @@ button.btn-num {
             background-color: #c2cdf7;
         }
     }
+
 
     & .fake-btn {
         background-color: $ops-color;
@@ -174,13 +179,23 @@ body {
 
 
 .dark-body {
+
     color: $d-font-color;   
-    #scientific-sec {
-        background-color: #f3053c69;
+    #wrap #scientific-sec  {
+        background-color: rgb(0 19 72);
+
+        .sci-btns {
+            border-top: solid 0.1rem rgb(171, 170, 170);
+        }
+
+        #sqrt, #sqrt-y, #pie {
+            border-left: solid 0.1rem;
+            border-color: rgb(171, 170, 170);
+        }
     }
     
     #history-sec {
-        background-color: #83ff2350;
+        background-color: rgb(0 71 47);
     }
 
 
@@ -201,9 +216,13 @@ body {
 
     // SCREEN
     #screen {
-        background-color: #3a5137;
+        background-color: #181e18;
         color: $d-font-color;
-    }      
+    }   
+    
+    #screen.light-on-screen {
+        background-color: #294d20dd;
+    }
 
     #main-c {
         background-color: rgb(171, 170, 170);
@@ -231,7 +250,7 @@ body {
             }
         }
 
-        & button.light-on {
+        & button.light-on-btn {
             background-color: #f4ac28;
             &:hover {
                 background: linear-gradient(to bottom, #ffca67 5%, #e6b967 100%);

@@ -1,21 +1,26 @@
-var Calculator1 = /** @class */ (function () {
-    function Calculator1() {
+var Calculator111 = /** @class */ (function () {
+    function Calculator111() {
         this.firstOperand = '';
         this.secondOperand = '';
         this.action = '';
         this.lastCalculated = '';
         this.state = 'Reg';
-        this.screen = byId('screen');
     }
-    Calculator1.prototype.updateScreen = function (key) {
+    Calculator111.prototype.updateScreen = function (key) {
         var temp = byId('screen');
+        console.log("UpScr given key: ".concat(key));
         temp.innerHTML += "".concat(key);
     };
-    Calculator1.prototype.parseNum = function (num) {
+    Calculator111.prototype.parseNum = function (num) {
         if (this.state === 'Reg') {
-            var lastChar = this.screen.innerHTML.slice(-1);
+            var lastChar = byId('screen').innerHTML.slice(-1);
             var numStr = '1234567890';
-            if (num === '.' && numStr.includes(lastChar)) {
+            if (this.lastCalculated == byId('screen').innerHTML) {
+                this.clearData();
+                this.firstOperand += num;
+                this.updateScreen(num);
+            }
+            else if (num === '.' && numStr.includes(lastChar)) {
                 if (this.firstOperand !== '' && this.firstOperand.includes(num) === false) {
                     this.firstOperand += num;
                     this.updateScreen(num);
@@ -38,19 +43,20 @@ var Calculator1 = /** @class */ (function () {
             }
         }
     };
-    Calculator1.prototype.parseAction = function (oper) {
+    Calculator111.prototype.parseAction = function (oper) {
         if (this.state === 'Reg') {
-            var lastChar = this.screen.innerHTML.slice(-1);
+            var lastChar = byId('screen').innerHTML.slice(-1);
             if (lastChar === '' || lastChar == '.') {
                 return;
             }
             else if ('+-/*'.includes(lastChar)) {
-                this.screen.innerHTML = this.screen.innerHTML.slice(0, -1);
-                this.updateScreen(oper);
+                byId('screen').innerHTML = byId('screen').innerHTML.slice(0, -1);
+                this.action = oper;
+                this.updateScreen(this.action);
             }
             else if (this.firstOperand !== '' && this.secondOperand !== '') {
-                console.log("first op: ".concat(this.firstOperand, " sec op: ").concat(this.secondOperand));
                 this.calculate();
+                this.action = oper;
                 byId('screen').innerHTML = this.lastCalculated;
             }
             else {
@@ -59,15 +65,46 @@ var Calculator1 = /** @class */ (function () {
             }
         }
     };
-    Calculator1.prototype.calculate = function () {
+    Calculator111.prototype.calculate = function () {
         if (this.state === 'Reg') {
+            // console.log(`fir op: ${this.firstOperand} act: ${this.action} sec: ${this.secondOperand}`)
             var res = eval(this.firstOperand + this.action + this.secondOperand);
+            this.clearData();
             this.lastCalculated = res;
             this.firstOperand = res;
-            this.action = res;
+            // console.log(`fir op: ${this.firstOperand}`)
+            // this.action = res;
         }
     };
-    return Calculator1;
+    Calculator111.prototype.clearData = function () {
+        this.firstOperand = '';
+        this.secondOperand = '';
+        this.action = '';
+        this.lastCalculated = '';
+        byId('screen').innerHTML = '';
+    };
+    Calculator111.prototype.deleteLastKey = function () {
+        // console.log(`inner: ${(byId('screen').innerHTML)}`);
+        // console.log(`last cal: ${this.lastCalculated}`);
+        // console.log(`bool: ${byId('screen').innerHTML == this.lastCalculated}`);
+        var lastKey = byId('screen').innerHTML.slice(-1);
+        if (byId('screen').innerHTML.length < 1 || byId('screen').innerHTML == this.lastCalculated) {
+            return;
+        }
+        else if (this.secondOperand !== '') {
+            // console.log(`fir op type: ${typeof(this.firstOperand)}`)
+            // console.log(`fir op: ${this.firstOperand}`)
+            this.secondOperand = this.secondOperand.slice(0, -1);
+        }
+        else if ('+-/*'.includes(lastKey)) {
+            this.action = '';
+        }
+        else {
+            this.firstOperand = this.firstOperand.slice(0, -1);
+        }
+        byId('screen').innerHTML = byId('screen').innerHTML.slice(0, -1);
+    };
+    return Calculator111;
 }());
 // SHORTCUTS
 var byId = document.getElementById.bind(document);
@@ -78,7 +115,7 @@ var byClass = document.getElementsByClassName.bind(document);
 var numBtns = byClass('btn-num');
 var values = [];
 var operBtns = byClass('opers');
-var cal = new Calculator1();
+var cal = new Calculator111();
 // INFO FUCNTION
 // const infoBtn: HTMLButtonElement = byId('info')
 byId('info').addEventListener('click', function () {
@@ -87,32 +124,10 @@ byId('info').addEventListener('click', function () {
 //  LIGHTS 
 byId('mode').addEventListener('click', function () {
     var screen = byId('screen');
-    if (screen.style.backgroundColor !== 'white') {
-        // console.log(typeof(byId('wrap').classList))
-        screen.style.backgroundColor = 'white';
-        byId('mode').classList.remove('light-on');
-    }
-    else {
-        if (byId('body').classList.contains('dark-body')) {
-            screen.style.backgroundColor = '#3a5137';
-        }
-        else {
-            screen.style.backgroundColor = '#c0ffb8';
-            byId('mode').classList.add('light-on');
-        }
-    }
+    console.log('togg');
+    byId('screen').classList.toggle('light-on-screen');
+    byId('mode').classList.toggle('light-on-btn');
 });
-var _loop_1 = function (i) {
-    var numBtn = numBtns[i];
-    numBtn.addEventListener('click', function () {
-        console.log("screen text: ".concat(byId('screen').innerHTML));
-        console.log("last val: ".concat(cal.lastCalculated));
-        if (byId('screen').innerHTML == cal.lastCalculated) {
-            byId('screen').innerHTML = '';
-        }
-        cal.parseNum(numBtn.id);
-    });
-};
 // CONFIGUE PAGE
 // function getParams(url: string): any {
 //     let params = new searc (url).searchParams;
@@ -134,7 +149,26 @@ var _loop_1 = function (i) {
 // console.log(params)
 // const daForm: HTMLFormElement | null = document.getElementById('config-form');
 // const configData: FormData = new FormData(daForm);
-// push values listener
+// HANDLE BTNS CLICKS
+// NUMBER BUTTONS
+document.addEventListener('keyup', function (evt) {
+    console.log('hello');
+    console.log(evt.code);
+    if ('1234567890'.includes(evt.code.slice(-1))) {
+        cal.parseNum(evt.code.slice(-1));
+    }
+    evt.stopPropagation();
+    return evt;
+});
+var _loop_1 = function (i) {
+    var numBtn = numBtns[i];
+    numBtn.addEventListener('click', function () {
+        if (byId('screen').innerHTML == cal.lastCalculated) {
+            byId('screen').innerHTML = '';
+        }
+        cal.parseNum(numBtn.id);
+    });
+};
 for (var i = 0; i < numBtns.length; i++) {
     _loop_1(i);
 }
@@ -147,11 +181,20 @@ var _loop_2 = function (j) {
 for (var j = 0; j < operBtns.length; j++) {
     _loop_2(j);
 }
+// EQUAL BUTTON
 byId("=").addEventListener('click', function () {
+    console.log("fir op: ".concat(cal.firstOperand, " sec op: ").concat(cal.secondOperand));
     if (cal.firstOperand !== '' && cal.action !== '' && cal.secondOperand !== '') {
         cal.calculate();
         byId('screen').innerHTML = cal.lastCalculated;
     }
+});
+// C BUTTON
+byId('c').addEventListener('click', cal.clearData);
+// RETURN BUTTON
+byId('return').addEventListener('click', function () {
+    console.log("fir op: ".concat(cal.firstOperand, ", sec op: ").concat(cal.secondOperand));
+    cal.deleteLastKey();
 });
 // SCIENCE
 byId('sci').addEventListener('click', displayScienceSec);
@@ -174,11 +217,9 @@ function displayHistorySec() {
     if (byId('history-sec').style.display === 'none' || byId('history-sec').style.display === '') {
         byId('history-sec').style.display = 'grid';
         byId('main-c').style.borderLeft = 'none';
-        // cal.state = 'Sci'
     }
     else {
         byId('history-sec').style.display = 'none';
         byId('main-c').style.borderLeft = 'solid';
-        // cal.state = 'Reg'
     }
 }

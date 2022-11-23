@@ -22,6 +22,9 @@
       "ES2021"
     ],
     "watch": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "include":[
+      "./folder"
+    ]
   }
 }

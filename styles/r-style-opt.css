@@ -27,11 +27,15 @@ svg path {
 }
 
 #screen {
-  background-color: #cef7c9;
+  background-color: #f6f6f6;
   display: flex;
   align-items: flex-end;
   padding-left: 1vw;
   font-size: 2vw;
+}
+
+#screen.light-on-screen {
+  background-color: #cef7c9;
 }
 
 .wider {
@@ -85,7 +89,7 @@ button.btn-num:hover {
   position: relative;
   top: 0.05rem;
 }
-#main-c button.light-on {
+#main-c button.light-on-btn {
   background-color: #f4ac28;
   display: inline-block;
   cursor: pointer;
@@ -95,11 +99,11 @@ button.btn-num:hover {
   text-decoration: none;
   text-shadow: 0 0.001rem 0 #766a6a;
 }
-#main-c button.light-on:active {
+#main-c button.light-on-btn:active {
   position: relative;
   top: 0.05rem;
 }
-#main-c button.light-on:hover {
+#main-c button.light-on-btn:hover {
   background: linear-gradient(to bottom, #ffca67 5%, #e6b967 100%);
   background-color: #c2cdf7;
 }
@@ -171,7 +175,6 @@ button.btn-num:hover {
   font-weight: bold;
   text-decoration: none;
   text-shadow: 0 0.001rem 0 #766a6a;
-  border-top: solid 0.1rem;
 }
 #scientific-sec .sci-btns:active {
   position: relative;
@@ -198,11 +201,18 @@ body {
 .dark-body {
   color: #c7c4c4;
 }
-.dark-body #scientific-sec {
-  background-color: rgba(243, 5, 60, 0.4117647059);
+.dark-body #wrap #scientific-sec {
+  background-color: rgb(0, 19, 72);
+}
+.dark-body #wrap #scientific-sec .sci-btns {
+  border-top: solid 0.1rem rgb(171, 170, 170);
+}
+.dark-body #wrap #scientific-sec #sqrt, .dark-body #wrap #scientific-sec #sqrt-y, .dark-body #wrap #scientific-sec #pie {
+  border-left: solid 0.1rem;
+  border-color: rgb(171, 170, 170);
 }
 .dark-body #history-sec {
-  background-color: rgba(131, 255, 35, 0.3137254902);
+  background-color: rgb(0, 71, 47);
 }
 .dark-body svg path {
   fill: #c7c4c4;
@@ -214,8 +224,11 @@ body {
   color: #c7c4c4;
 }
 .dark-body #screen {
-  background-color: #3a5137;
+  background-color: #181e18;
   color: #c7c4c4;
+}
+.dark-body #screen.light-on-screen {
+  background-color: rgba(41, 77, 32, 0.8666666667);
 }
 .dark-body #main-c {
   background-color: rgb(171, 170, 170);
@@ -236,10 +249,10 @@ body {
   background: linear-gradient(to bottom, #4f0826 5%, #b12f65 100%);
   background-color: #c2cdf7;
 }
-.dark-body #main-c button.light-on {
+.dark-body #main-c button.light-on-btn {
   background-color: #f4ac28;
 }
-.dark-body #main-c button.light-on:hover {
+.dark-body #main-c button.light-on-btn:hover {
   background: linear-gradient(to bottom, #ffca67 5%, #e6b967 100%);
   background-color: #c2cdf7;
 }
