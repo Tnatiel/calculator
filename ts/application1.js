@@ -223,13 +223,13 @@ byId('sci').addEventListener('click', displayScienceSec);
 function displayHistorySec() {
     if (byId('history-sec').style.display === 'none' || byId('history-sec').style.display === '') {
         byId('history-sec').style.display = 'grid';
-        if (screen.width < 810) {
+        if (screen.width > 810) {
             byId('main-c').style.borderLeft = 'none';
         }
     }
     else {
         byId('history-sec').style.display = 'none';
-        if (screen.width < 810) {
+        if (screen.width > 810) {
             byId('main-c').style.borderLeft = 'solid 0.1rem';
         }
     }

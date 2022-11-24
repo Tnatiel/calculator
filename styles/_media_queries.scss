@@ -34,6 +34,33 @@ $galaxy-3: 365px;
 
     #history-sec, #scientific-sec {
         height: 30%;
+        border-right: solid 0.1rem;
+        border-left: solid 0.1rem;
+    }
+
+    .scientific-sec {
+        border: none;
+    }
+
+    #wrap .sci-btn-div{
+        grid-row: 2/-1;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 1fr 1fr;
+        border: none;
+        
+        // #wrap #scientific .sci-btns {
+        //     border: none;
+        // }
+        
+
+        #base-btn {
+            grid-column: -1/-2;
+            grid-row: 1/-1;
+        }
+
+        #sqrt, #sqrt-y, #pie {
+            border: none;
+        }
     }
     
     // #wrap #scientific-sec {
@@ -70,6 +97,21 @@ $galaxy-3: 365px;
 
     body #wrap button.btns {
         font-size: 1rem;
+    }
+
+    .scientific-sec {
+        border: none;
+    }
+
+    .sci-btn-div{
+        grid-row: 2/-1;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: 1fr 1fr;
+
+        #bast-btn {
+            grid-column: -1/-2;
+            grid-row: 1/-1;
+        }
     }
         
 }

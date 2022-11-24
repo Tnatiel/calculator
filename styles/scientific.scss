@@ -3,9 +3,16 @@
 
 @mixin sci-sec {
     display: none;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1.99fr repeat(4, 1fr);
+    grid-template-rows: 1fr 1.99fr 4fr;
     border: solid 0.1rem;
+
+    .sci-btn-div {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        background-color: black;
+        gap: 0.1rem;
+        border-top: 0.1rem solid;
+    }
 
     h1 {
         grid-column: 1/-1;
@@ -20,7 +27,6 @@
 
     .sci-btns {
         @include btn;
-        border-top: solid 0.1rem;
 
         &:hover {
             background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
@@ -32,8 +38,6 @@
             top: 0.05rem;
         }
     }
-    #sqrt, #sqrt-y, #pie {
-        border-left: solid 0.1rem;
-    }
+    
 }
 
