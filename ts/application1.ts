@@ -4,32 +4,37 @@ class Calculator111 {
     firstOperand: string;
     secondOperand: string;
     action: string;
-    lastCalculated: string;
+    lastCalculated: number;
     state: string;
-    screen: HTMLDivElement;
+    expressionStorage: string[];
     constructor() {
         this.firstOperand = '';
         this.secondOperand = '';
         this.action = '';
-        this.lastCalculated = '';
+        this.lastCalculated = 0;
         this.state = 'Reg'
+        this.expressionStorage = []
         }
 
     updateScreen(key: string) {
         let temp: HTMLDivElement = byId('screen');
-        console.log(`UpScr given key: ${key}`)
+        // console.log(`UpScr given key: ${key}`)
+        // console.log(`fir op: ${this.firstOperand} sec op: ${this.secondOperand}`);
+        // console.log(`action: ${this.action} last cal: ${this.lastCalculated}`);
+        
         temp.innerHTML += `${key}`
     } 
 
     parseNum (num:string): void {
         if (this.state === 'Reg') {
             const lastChar:string =  byId('screen').innerHTML.slice(-1)
-            const numStr: string = '1234567890';
-            if (this.lastCalculated == byId('screen').innerHTML) {
-                this.clearData()
-                this.firstOperand += num
+            console.log(`last: ${this.expressionStorage.slice(-1)} res: ${eval(String(this.expressionStorage.slice(-1)))}`)
+            if (this.lastCalculated !== 0 &&  this.action === '') { //(this.expressionStorage.length >= 0 && this.lastCalculated === eval(String(this.expressionStorage.slice(-1)))) {
+                this.clearData();
+                this.firstOperand += num;
                 this.updateScreen(num)
-            } else if (num === '.' && numStr.includes(lastChar)){
+            } else if (num === '.' && '1234567890'.includes(lastChar)){
+                console.log(this.firstOperand);
                 if (this.firstOperand !== '' && this.firstOperand.includes(num) === false) {
                     this.firstOperand += num;
                     this.updateScreen(num);
@@ -44,25 +49,26 @@ class Calculator111 {
                 this.secondOperand += num ; 
                 this.updateScreen(num);
             }
-        } 
+        }
+        // console.log(`fir op: ${this.firstOperand} sec op: ${this.secondOperand}`);
     }
 
     parseAction(oper:string) {
-        if (this.state === 'Reg') {
-            const lastChar:string =  byId('screen').innerHTML.slice(-1);
-            if (lastChar === '' || lastChar == '.') {
-                return
-            } else if ('+-/*'.includes(lastChar)) {
-                byId('screen').innerHTML = byId('screen').innerHTML.slice(0,-1); 
-                this.action = oper
-                this.updateScreen(this.action);
-            } else if (this.firstOperand !== '' && this.secondOperand !== ''){
+        const lastChar:string =  byId('screen').innerHTML.slice(-1);
+        if (lastChar === '' || lastChar == '.') {return} 
+        if ('+-/*'.includes(lastChar)) {
+           byId('screen').innerHTML = byId('screen').innerHTML.slice(0,-1); 
+           this.action = oper
+           this.updateScreen(oper);
+       } 
+        else if (this.state === 'Reg') {
+             if (this.firstOperand !== '' && this.secondOperand !== ''){
                 this.calculate();
-                this.action = oper
+                this.action = oper;
                 byId('screen').innerHTML = this.lastCalculated;
             } else {
                 this.action = oper
-                this.updateScreen(this.action)
+                this.updateScreen(oper)
             }
         } else if (this.state === 'Sci') {
             const highOpers = '*/'
@@ -74,34 +80,36 @@ class Calculator111 {
     calculate() {
         if (this.state === 'Reg') {
             // console.log(`fir op: ${this.firstOperand} act: ${this.action} sec: ${this.secondOperand}`)
-            let res: string = eval(this.firstOperand + this.action + this.secondOperand);
+            let curData: string = this.firstOperand + this.action + this.secondOperand;
+            this.expressionStorage.push(curData);
+            let res: number = (eval(this.firstOperand + this.action + this.secondOperand));
             this.clearData();
             this.lastCalculated = res;
-            this.firstOperand = res;
+            this.firstOperand = res.toString();
+            
+            
             // console.log(`fir op: ${this.firstOperand}`)
             // this.action = res;
         }
     }
 
     clearData() {
-        this.firstOperand = '';
-        this.secondOperand = '';
-        this.action = '';
-        this.lastCalculated = '';
+        // console.log('before "clear')
+        // console.log(`fir op: ${this.firstOperand} sec op: ${this.secondOperand}`);
+        // console.log(`action: ${this.action} last cal: ${this.lastCalculated}`);
+        cal.firstOperand = '';
+        cal.secondOperand = '';
+        cal.action = '';
+        cal.lastCalculated = 0;
         byId('screen').innerHTML = ''
-        
+        console.log(this)
     }
 
     deleteLastKey() {
-
-        // console.log(`inner: ${(byId('screen').innerHTML)}`);
-        // console.log(`last cal: ${this.lastCalculated}`);
-        // console.log(`bool: ${byId('screen').innerHTML == this.lastCalculated}`);
         const lastKey = byId('screen').innerHTML.slice(-1);
         if (byId('screen').innerHTML.length < 1 || byId('screen').innerHTML == this.lastCalculated) {return}
         else if (this.secondOperand !== '') {
-            // console.log(`fir op type: ${typeof(this.firstOperand)}`)
-            // console.log(`fir op: ${this.firstOperand}`)
+
             this.secondOperand = this.secondOperand.slice(0,-1)
         } else if ('+-/*'.includes(lastKey)){
             this.action = ''
@@ -118,20 +126,13 @@ class Calculator111 {
 const byId = document.getElementById.bind(document);
 const byClass = document.getElementsByClassName.bind(document);
 
-                        // MY BUTTONS
-// ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 // NUMBER BUTTONS
-const numBtns: HTMLButtonElement[] = byClass('btn-num');
 const values: string[] = [];
-const operBtns: HTMLButtonElement[] = byClass('opers');
-
-
 
 
 const cal = new Calculator111()
 
-// INFO FUCNTION
-
+// CREATING MESSAGE DIV
 const version = '1'
 const pageDiv: HTMLDivElement =document.createElement('div');
 const infoDiv: HTMLDivElement =document.createElement('div');
@@ -158,6 +159,7 @@ pageDiv.appendChild(okBtn)
 byId('body').appendChild(pageDiv);
 document.querySelector('head')?.appendChild(pageStyle)
 
+// INFO FUCNTION
 byId('info').addEventListener('click', () => {
     if (!byId('page-wraper').classList.contains('info-page-shown')) {
         byId('page-wraper').classList.remove('page-wraper')
@@ -187,29 +189,29 @@ byId('settings').addEventListener('click', () => {
     window.open('/config.html','config', params);
 ;})
 
-
-
 // // GET FORM DATA
 
-//   HANDLAING KEYBOARD
 
+
+//   HANDLAING KEYBOARD
 // NUMBER PAD
 
-document.addEventListener('keyup', (evt): Event => {
-    console.log('hello')
-    console.log(evt.code);
-    if (evt.code >= 'Numpad0' || evt.code >= 'Numpad0'){
-    // if ('1234567890'.includes(evt.code.slice(-1))) 
-        cal.parseNum(evt.code.slice(-1))
-    }
-    evt.stopPropagation()
-    return evt
-})
+// document.addEventListener('keyup', (evt): Event => {
+//     console.log('hello')
+//     console.log(evt.code);
+//     if (evt.code >= 'Numpad0' || evt.code >= 'Numpad0'){
+//     // if ('1234567890'.includes(evt.code.slice(-1))) 
+//         cal.parseNum(evt.code.slice(-1))
+//     }
+//     evt.stopPropagation()
+//     return evt
+// })
  
-// HANDLE BTNS CLICKS
 
+// ******************HANDLE BTNS CLICKS********************
 // NUMBER BUTTONS
 
+const numBtns: HTMLButtonElement[] = byClass('btn-num');
 
 for (let i = 0; i < numBtns.length; i++) {
     const numBtn: HTMLButtonElement = numBtns[i]
@@ -218,12 +220,12 @@ for (let i = 0; i < numBtns.length; i++) {
             byId('screen').innerHTML = ''
         }
         cal.parseNum(numBtn.id);
+        console.log(`fir op: ${cal.firstOperand} sec op: ${cal.secondOperand}`);
     })
-
-
-// OPER BUTTONS
-
 }
+
+const operBtns: HTMLButtonElement[] = byClass('opers');
+// OPER BUTTONS
 for (let j = 0; j < operBtns.length; j++) {
     const operBtn: HTMLButtonElement = operBtns[j]
     operBtn.addEventListener('click', () => {
