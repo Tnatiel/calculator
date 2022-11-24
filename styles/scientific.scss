@@ -1,10 +1,15 @@
 
 
-
-@mixin sci-sec {
-    display: none;
+@mixin sci-shown-r {
+    background-color: #f9b2c3;
+    display: grid;
     grid-template-rows: 1fr 1.99fr 4fr;
-    border: solid 0.1rem;
+    border-right: solid 0.1rem;
+    border-bottom: solid 0.1rem;
+    border-top: solid 0.1rem;
+}
+
+@mixin inner-elements {
 
     .sci-btn-div {
         display: grid;
@@ -16,11 +21,12 @@
 
     h1 {
         grid-column: 1/-1;
-        
     }
+
     #blank {
         grid-column: 1/-1;
     }
+
     #base-btn {
         grid-column: 1/-1;
     }
@@ -38,6 +44,5 @@
             top: 0.05rem;
         }
     }
-    
 }
 

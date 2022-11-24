@@ -122,34 +122,18 @@ byId('info').addEventListener('click', function () {
     alert("        Developers name: Natiel\n        Calculator version: 1\n        Description: A web calculator based on javascript, scss and html\n    ");
 });
 //  LIGHTS 
-byId('mode').addEventListener('click', function () {
-    var screen = byId('screen');
-    console.log('togg');
+byId('screen-light-btn').addEventListener('click', function () {
     byId('screen').classList.toggle('light-on-screen');
-    byId('mode').classList.toggle('light-on-btn');
+    byId('screen-light-btn').classList.toggle('light-on-btn');
 });
 // CONFIGUE PAGE
-// function getParams(url: string): any {
-//     let params = new searc (url).searchParams;
-//     let relvantData = [params.get('font'), params.get('color'), params.get('mode')] ;
-//     console.log(relvantData);
-// }
-// POPUP PAGE
-// const dBase = localStorage.setItem('color', 'font')
+// POPUP 
 byId('settings').addEventListener('click', function () {
     var params = 'resizable=no,status=no,location=no,toolbar=no,menubar=no,scrollbars=no,location=no,width=600,height=500,left=300,top=200';
-    // window.open('http://127.0.0.1:5501/config.html', 'config', params)
     window.open('/config.html', 'config', params);
     ;
 });
 // // GET FORM DATA
-// // console.log(document.querySelector('.sub-btn'));
-//     // const dataUrl: string = window.location.href;
-//     // console.log(dataUrl);
-// let params = new URLSearchParams('/config.html')
-// console.log(params)
-// const daForm: HTMLFormElement | null = document.getElementById('config-form');
-// const configData: FormData = new FormData(daForm);
 //   HANDLAING KEYBOARD
 // NUMBER PAD
 document.addEventListener('keyup', function (evt) {
@@ -201,37 +185,12 @@ byId('return').addEventListener('click', function () {
     cal.deleteLastKey();
 });
 // SCIENCE
-function displayScienceSec() {
-    if (byId('scientific-sec').style.display === 'none' || byId('scientific-sec').style.display === '') {
-        byId('scientific-sec').style.display = 'grid';
-        if (window.screen.width < 810) {
-            byId('main-c').style.borderRight = 'none';
-        }
-        // cal.state = 'Sci'
-    }
-    else {
-        byId('scientific-sec').style.display = 'none';
-        if (window.screen.width < 810) {
-            byId('main-c').style.borderRight = 'solid 0.1rem';
-        }
-        // cal.state = 'Reg'
-    }
-    return;
-}
-byId('sci').addEventListener('click', displayScienceSec);
+byId('sci-btn').addEventListener('click', function () {
+    byId('scientific-sec').classList.toggle('sci-shown-r');
+    byId('sci-btn').classList.toggle('light-on-btn');
+});
 // HISTORY
-function displayHistorySec() {
-    if (byId('history-sec').style.display === 'none' || byId('history-sec').style.display === '') {
-        byId('history-sec').style.display = 'grid';
-        if (screen.width > 810) {
-            byId('main-c').style.borderLeft = 'none';
-        }
-    }
-    else {
-        byId('history-sec').style.display = 'none';
-        if (screen.width > 810) {
-            byId('main-c').style.borderLeft = 'solid 0.1rem';
-        }
-    }
-}
-byId('history-btn').addEventListener('click', displayHistorySec);
+byId('history-btn').addEventListener('click', function () {
+    byId('history-sec').classList.toggle('history-shown-r');
+    byId('history-btn').classList.toggle('light-on-btn');
+});

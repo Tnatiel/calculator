@@ -1,13 +1,21 @@
 
 $ipad-air: 820px;
-$galaxy-3: 365px;
+$iphone-se: 375px;
 
 // @function size-adapts($screen-size) {
 //     if width: >= $screen-s;
-// }
+// }'
+
+
+@mixin other-secs {
+    height: 30%;
+    border-right: solid 0.1rem;
+    border-left: solid 0.1rem;
+    border-top: none;
+}
+
 
 @mixin ipad-air {
-    
     .control-imgs {
         height: 3vh; 
         padding: 0.5rem 0 0;
@@ -32,25 +40,20 @@ $galaxy-3: 365px;
         font-weight: 700;
     }
 
-    #history-sec, #scientific-sec {
-        height: 30%;
-        border-right: solid 0.1rem;
-        border-left: solid 0.1rem;
+    #history-sec {
+        @include other-secs
+    }
+    
+    #scientific-sec {
+        @include other-secs
     }
 
-    .scientific-sec {
-        border: none;
-    }
 
     #wrap .sci-btn-div{
         grid-row: 2/-1;
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: 1fr 1fr;
         border: none;
-        
-        // #wrap #scientific .sci-btns {
-        //     border: none;
-        // }
         
 
         #base-btn {
@@ -63,13 +66,9 @@ $galaxy-3: 365px;
         }
     }
     
-    // #wrap #scientific-sec {
-    //     height: 50vh;
-    // }
-        
 }
 
-@mixin galaxy-3 {
+@mixin iphone-se {
 
     .control-imgs {
         height: 2.5vh; 
@@ -81,7 +80,7 @@ $galaxy-3: 365px;
         display: flex;
         grid-template-columns: 1fr 2fr 1fr;
         position: relative;
-        top: 5vh;
+        top: 4vh;
         width: 90%;
         flex-direction: column;
     }

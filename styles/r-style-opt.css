@@ -22,7 +22,6 @@ svg path {
 }
 
 h1 {
-  color: #232020;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -125,36 +124,45 @@ button.btn-num:hover {
   font-weight: bold;
   text-decoration: none;
   text-shadow: 0 0.001rem 0 #766a6a;
-  background-color: #f9a8d4;
+  background-color: #d9afe8;
 }
 #main-c button[id="="]:active {
   position: relative;
   top: 0.05rem;
 }
 #main-c button[id="="]:hover {
-  background: linear-gradient(to bottom, #f9b2c3 5%, #f894b2 100%);
+  background: linear-gradient(to bottom, #f3d3ff 5%, rgba(229, 157, 255, 0.9647058824) 100%);
   background-color: #5b4d55;
 }
 
-#history-sec {
+.history-hidden-r {
+  display: none;
+}
+
+.history-shown-r {
   background-color: #d4fab7;
   grid-column: 1/2;
   grid-row: 1;
-  border: solid 0.1rem;
-  display: none;
+  border-left: solid 0.1rem;
+  border-top: solid 0.1rem;
+  border-bottom: solid 0.1rem;
+  display: grid;
   grid-template-rows: 0.5fr 3fr;
 }
-#history-sec h1 {
-  display: flex;
-  column-gap: 0.5vw;
+
+.sci-hidden-r {
+  display: none;
 }
 
-#scientific-sec {
+.sci-shown-r {
   background-color: #f9b2c3;
-  display: none;
+  display: grid;
   grid-template-rows: 1fr 1.99fr 4fr;
-  border: solid 0.1rem;
+  border-right: solid 0.1rem;
+  border-bottom: solid 0.1rem;
+  border-top: solid 0.1rem;
 }
+
 #scientific-sec .sci-btn-div {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -202,12 +210,12 @@ body {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   position: relative;
-  top: 4rem;
+  top: 2rem;
   width: 90%;
   height: 90vh;
 }
 
-@media screen and (width < 850px) {
+@media screen and (width < 914px) {
   .control-imgs {
     height: 3vh;
     padding: 0.5rem 0 0;
@@ -228,13 +236,17 @@ body {
     font-size: 1rem;
     font-weight: 700;
   }
-  #history-sec, #scientific-sec {
+  #history-sec {
     height: 30%;
     border-right: solid 0.1rem;
     border-left: solid 0.1rem;
+    border-top: none;
   }
-  .scientific-sec {
-    border: none;
+  #scientific-sec {
+    height: 30%;
+    border-right: solid 0.1rem;
+    border-left: solid 0.1rem;
+    border-top: none;
   }
   #wrap .sci-btn-div {
     grid-row: 2/-1;
@@ -260,7 +272,7 @@ body {
     display: flex;
     grid-template-columns: 1fr 2fr 1fr;
     position: relative;
-    top: 5vh;
+    top: 4vh;
     width: 90%;
     flex-direction: column;
   }
@@ -292,13 +304,6 @@ body {
 }
 .dark-body #wrap #scientific-sec {
   background-color: rgb(0, 19, 72);
-}
-.dark-body #wrap #scientific-sec .sci-btns {
-  border-top: solid 0.1rem rgb(171, 170, 170);
-}
-.dark-body #wrap #scientific-sec #sqrt, .dark-body #wrap #scientific-sec #sqrt-y, .dark-body #wrap #scientific-sec #pie {
-  border-left: solid 0.1rem;
-  border-color: rgb(171, 170, 170);
 }
 .dark-body #history-sec {
   background-color: rgb(0, 71, 47);
