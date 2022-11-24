@@ -1,3 +1,4 @@
+
 class Calculator111 {
 
     firstOperand: string;
@@ -43,7 +44,7 @@ class Calculator111 {
                 this.secondOperand += num ; 
                 this.updateScreen(num);
             }
-        }
+        } 
     }
 
     parseAction(oper:string) {
@@ -62,7 +63,13 @@ class Calculator111 {
             } else {
                 this.action = oper
                 this.updateScreen(this.action)
-            }}}
+            }
+        } else if (this.state === 'Sci') {
+            const highOpers = '*/'
+            const lowOpers = '-+'
+            
+        }
+    }
 
     calculate() {
         if (this.state === 'Reg') {
@@ -124,14 +131,48 @@ const operBtns: HTMLButtonElement[] = byClass('opers');
 const cal = new Calculator111()
 
 // INFO FUCNTION
-const infoBtn: HTMLButtonElement = byId('info')
-byId('info').addEventListener('click', () => {
-    alert(`        Developers name: Natiel
-        Calculator version: 1
-        Description: A web calculator based on javascript, scss and html
-    `)
-});
 
+const version = '1'
+const pageDiv: HTMLDivElement =document.createElement('div');
+const infoDiv: HTMLDivElement =document.createElement('div');
+const nameP: HTMLParagraphElement = document.createElement('p'); 
+const verP: HTMLParagraphElement = document.createElement('p'); 
+const decP: HTMLParagraphElement = document.createElement('p'); 
+const pageStyle: HTMLStyleElement = document.createElement('style');
+const okBtn :HTMLButtonElement = document.createElement('button');
+okBtn.setAttribute('id', 'info-ok-btn');
+pageStyle.innerHTML = '.page-wraper {display: none;}';
+pageDiv.setAttribute('id', 'page-wraper');
+pageDiv.className = 'page-wraper';
+infoDiv.setAttribute('id', 'info-wraper');
+infoDiv.className = 'info-wraper';
+okBtn.innerHTML = 'OK';
+nameP.innerHTML = 'Developer name: Natiel';
+verP.innerHTML = `Version: ${version}`;
+decP.innerHTML = 'Description: A web calculator based on javascript, scss and html'
+infoDiv.appendChild(nameP);
+infoDiv.appendChild(verP);
+infoDiv.appendChild(decP);
+pageDiv.appendChild(infoDiv);
+pageDiv.appendChild(okBtn)
+byId('body').appendChild(pageDiv);
+document.querySelector('head')?.appendChild(pageStyle)
+
+byId('info').addEventListener('click', () => {
+    if (!byId('page-wraper').classList.contains('info-page-shown')) {
+        byId('page-wraper').classList.remove('page-wraper')
+        byId('page-wraper').classList.add('info-page-shown')
+    } else {
+        byId('page-wraper').classList.remove('info-page-shown')
+        byId('page-wraper').classList.add('page-wraper')
+    }
+})
+
+
+byId('info-ok-btn').addEventListener('click', () =>{
+    byId('page-wraper').classList.remove('info-page-shown');
+    byId('page-wraper').classList.add('page-wraper');
+})
 //  LIGHTS 
 byId('screen-light-btn').addEventListener('click', () => {
     byId('screen').classList.toggle('light-on-screen'); 

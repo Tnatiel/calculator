@@ -1,3 +1,4 @@
+var _a;
 var Calculator111 = /** @class */ (function () {
     function Calculator111() {
         this.firstOperand = '';
@@ -64,6 +65,10 @@ var Calculator111 = /** @class */ (function () {
                 this.updateScreen(this.action);
             }
         }
+        else if (this.state === 'Sci') {
+            var highOpers = '*/';
+            var lowOpers = '-+';
+        }
     };
     Calculator111.prototype.calculate = function () {
         if (this.state === 'Reg') {
@@ -117,9 +122,44 @@ var values = [];
 var operBtns = byClass('opers');
 var cal = new Calculator111();
 // INFO FUCNTION
-var infoBtn = byId('info');
+var version = '1';
+var pageDiv = document.createElement('div');
+var infoDiv = document.createElement('div');
+var nameP = document.createElement('p');
+var verP = document.createElement('p');
+var decP = document.createElement('p');
+var pageStyle = document.createElement('style');
+var okBtn = document.createElement('button');
+okBtn.setAttribute('id', 'info-ok-btn');
+pageStyle.innerHTML = '.page-wraper {display: none;}';
+pageDiv.setAttribute('id', 'page-wraper');
+pageDiv.className = 'page-wraper';
+infoDiv.setAttribute('id', 'info-wraper');
+infoDiv.className = 'info-wraper';
+okBtn.innerHTML = 'OK';
+nameP.innerHTML = 'Developer name: Natiel';
+verP.innerHTML = "Version: ".concat(version);
+decP.innerHTML = 'Description: A web calculator based on javascript, scss and html';
+infoDiv.appendChild(nameP);
+infoDiv.appendChild(verP);
+infoDiv.appendChild(decP);
+pageDiv.appendChild(infoDiv);
+pageDiv.appendChild(okBtn);
+byId('body').appendChild(pageDiv);
+(_a = document.querySelector('head')) === null || _a === void 0 ? void 0 : _a.appendChild(pageStyle);
 byId('info').addEventListener('click', function () {
-    alert("        Developers name: Natiel\n        Calculator version: 1\n        Description: A web calculator based on javascript, scss and html\n    ");
+    if (!byId('page-wraper').classList.contains('info-page-shown')) {
+        byId('page-wraper').classList.remove('page-wraper');
+        byId('page-wraper').classList.add('info-page-shown');
+    }
+    else {
+        byId('page-wraper').classList.remove('info-page-shown');
+        byId('page-wraper').classList.add('page-wraper');
+    }
+});
+byId('info-ok-btn').addEventListener('click', function () {
+    byId('page-wraper').classList.remove('info-page-shown');
+    byId('page-wraper').classList.add('page-wraper');
 });
 //  LIGHTS 
 byId('screen-light-btn').addEventListener('click', function () {

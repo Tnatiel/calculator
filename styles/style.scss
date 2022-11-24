@@ -92,6 +92,39 @@ h1 {
     grid-column: 2/ -2;
 }
 
+.info-page-shown {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    grid-column: 2/-2;
+    grid-row: 1/-1;
+    background-color: rgba(129, 249, 237, 0.96);
+    position: absolute;
+    
+    width: 70%;
+    gap: 5vh;
+    padding: 10vw 6vw;
+    
+
+    .info-wraper {
+        border: dashed;
+        width: fit-content;
+        padding: 2rem;
+        font-size: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2vh;
+    }
+
+    button {
+        align-self: center;
+        @include btn;
+        padding: 2vh 5vw;
+        border-radius: 1rem;
+    }
+}
+
 button.btn-num {
     @include btn;
     &:hover{
@@ -189,6 +222,7 @@ button.btn-num {
 body {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 #wrap {

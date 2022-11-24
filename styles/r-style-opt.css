@@ -49,6 +49,45 @@ h1 {
   grid-column: 2/-2;
 }
 
+.info-page-shown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  grid-column: 2/-2;
+  grid-row: 1/-1;
+  background-color: rgba(129, 249, 237, 0.96);
+  position: absolute;
+  width: 70%;
+  gap: 5vh;
+  padding: 10vw 6vw;
+}
+.info-page-shown .info-wraper {
+  border: dashed;
+  width: fit-content;
+  padding: 2rem;
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+}
+.info-page-shown button {
+  align-self: center;
+  display: inline-block;
+  cursor: pointer;
+  color: #232020;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-decoration: none;
+  text-shadow: 0 0.001rem 0 #766a6a;
+  padding: 2vh 5vw;
+  border-radius: 1rem;
+}
+.info-page-shown button:active {
+  position: relative;
+  top: 0.05rem;
+}
+
 button.btn-num {
   display: inline-block;
   cursor: pointer;
@@ -204,6 +243,7 @@ button.btn-num:hover {
 body {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 #wrap {
