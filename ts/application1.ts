@@ -240,13 +240,15 @@ byId('return').addEventListener('click', () => {
 function displayScienceSec(): void {
     if (byId('scientific-sec').style.display === 'none' || byId('scientific-sec').style.display === ''){
         byId('scientific-sec').style.display = 'grid'
-        if (screen.width > 810) {
+        if (window.screen.width < 810) {
             byId('main-c').style.borderRight = 'none'
         }
         // cal.state = 'Sci'
     } else { 
         byId('scientific-sec').style.display = 'none';
-        byId('main-c').style.borderRight = 'solid 0.1rem';
+        if (window.screen.width < 810) {
+            byId('main-c').style.borderRight = 'solid 0.1rem';
+        }
         // cal.state = 'Reg'
     }
     return
@@ -260,13 +262,13 @@ byId('sci').addEventListener('click', displayScienceSec)
 function displayHistorySec(): void {
     if (byId('history-sec').style.display === 'none' || byId('history-sec').style.display === ''){
         byId('history-sec').style.display = 'grid';
-        if (screen.width > 810) {
+        if (screen.width < 810) {
             byId('main-c').style.borderLeft = 'none';
         }
         
     } else { 
         byId('history-sec').style.display = 'none';
-        if (screen.width > 810) {
+        if (screen.width < 810) {
             byId('main-c').style.borderLeft = 'solid 0.1rem';
         }
     }

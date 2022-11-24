@@ -7,9 +7,9 @@ $galaxy-3: 365px;
 // }
 
 @mixin ipad-air {
-
+    
     .control-imgs {
-        height: 2.5vh; 
+        height: 3vh; 
         padding: 0.5rem 0 0;
         width: 1.5rem;  // (numbers too)
     }
@@ -31,6 +31,14 @@ $galaxy-3: 365px;
         font-size: 1rem;
         font-weight: 700;
     }
+
+    #history-sec, #scientific-sec {
+        height: 30%;
+    }
+    
+    // #wrap #scientific-sec {
+    //     height: 50vh;
+    // }
         
 }
 
@@ -46,7 +54,7 @@ $galaxy-3: 365px;
         display: flex;
         grid-template-columns: 1fr 2fr 1fr;
         position: relative;
-        top: 2vh;
+        top: 5vh;
         width: 90%;
         flex-direction: column;
     }
@@ -55,16 +63,12 @@ $galaxy-3: 365px;
         border: solid 0.5rem;
     }
 
-    .wider h3 {
+    h1 {
         font-size: 1rem;
         font-weight: 700;
     }
 
-    button.btn-num {
-        font-size: 1rem;
-    }
-
-    #main-c .btn-control, #main-c .opers {
+    body #wrap button.btns {
         font-size: 1rem;
     }
         

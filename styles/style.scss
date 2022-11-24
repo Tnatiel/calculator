@@ -58,12 +58,19 @@ svg path{
     align-items: center;
     justify-content: center;
 }
-
-.wider h3{
-    font-size: 3vw;
+h1 {
     color: $font-color;
-    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5vw;
 }
+
+.second-heading {
+    border-bottom: solid 0.1rem;
+}
+
+
 
 // SCREEN
 
@@ -92,6 +99,8 @@ button.btn-num {
     }
 }
 
+
+
 #main-c {
     background-color: black;
     display: grid;
@@ -102,6 +111,9 @@ button.btn-num {
     border: solid 0.1rem;
     
     
+    .btns {
+        
+    }
 
     & .btn-control, .opers {
         
@@ -166,20 +178,20 @@ body {
 
 #wrap {
     display: grid;
-    grid-template-columns: 0.8fr 2fr 0.8fr;
+    grid-template-columns: 1fr 2fr 1fr;
     position: relative;
     top: 4rem;
     width: 90%;
-    height: 80vh;
+    height: 90vh;
 
 }
 
-@media screen  and (width < $ipad-air) {
-    @include ipad-air
+@media screen  and (width < 850px) {
+    @include ipad-air;
 }
 
-@media screen and (width < $galaxy-3) { 
-    @include galaxy-3
+@media screen and (width < 450px) { 
+    @include galaxy-3;
 }
 
 

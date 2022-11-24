@@ -21,10 +21,16 @@ svg path {
   justify-content: center;
 }
 
-.wider h3 {
-  font-size: 3vw;
+h1 {
   color: #232020;
-  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5vw;
+}
+
+.second-heading {
+  border-bottom: solid 0.1rem;
 }
 
 #screen {
@@ -135,30 +141,22 @@ button.btn-num:hover {
   grid-row: 1;
   border: solid 0.1rem;
   display: none;
-  grid-template-rows: 0.1fr 3fr;
+  grid-template-rows: 0.5fr 3fr;
 }
-#history-sec h4 {
-  border-bottom: solid 0.1rem;
-  display: inline-block;
-  text-align: center;
-  padding: 1.42rem 0;
-  font-size: 1.5rem;
+#history-sec h1 {
+  display: flex;
+  column-gap: 0.5vw;
 }
 
 #scientific-sec {
   background-color: #f9b2c3;
   display: none;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1.98fr repeat(4, 1fr);
+  grid-template-rows: 1fr 1.99fr repeat(4, 1fr);
   border: solid 0.1rem;
 }
-#scientific-sec h4 {
-  border-bottom: solid 0.1rem;
-  display: inline-block;
-  text-align: center;
-  padding-top: 0.6rem;
+#scientific-sec h1 {
   grid-column: 1/-1;
-  font-size: 1.5rem;
 }
 #scientific-sec #blank {
   grid-column: 1/-1;
@@ -170,12 +168,19 @@ button.btn-num:hover {
   display: inline-block;
   cursor: pointer;
   color: #232020;
-  font-family: Arial;
   font-size: 1.5rem;
   font-weight: bold;
   text-decoration: none;
   text-shadow: 0 0.001rem 0 #766a6a;
   border-top: solid 0.1rem;
+}
+#scientific-sec .sci-btns:active {
+  position: relative;
+  top: 0.05rem;
+}
+#scientific-sec .sci-btns:hover {
+  background: linear-gradient(to bottom, #f6f6f6 5%, #ffffff 100%);
+  background-color: #030b2c;
 }
 #scientific-sec .sci-btns:active {
   position: relative;
@@ -192,16 +197,16 @@ body {
 
 #wrap {
   display: grid;
-  grid-template-columns: 0.8fr 2fr 0.8fr;
+  grid-template-columns: 1fr 2fr 1fr;
   position: relative;
   top: 4rem;
   width: 90%;
-  height: 80vh;
+  height: 90vh;
 }
 
-@media screen and (width < 820px) {
+@media screen and (width < 850px) {
   .control-imgs {
-    height: 2.5vh;
+    height: 3vh;
     padding: 0.5rem 0 0;
     width: 1.5rem;
   }
@@ -219,9 +224,12 @@ body {
   .wider h3 {
     font-size: 1rem;
     font-weight: 700;
+  }
+  #history-sec, #scientific-sec {
+    height: 30%;
   }
 }
-@media screen and (width < 365px) {
+@media screen and (width < 450px) {
   .control-imgs {
     height: 2.5vh;
     padding: 0.5rem 0 0;
@@ -231,21 +239,18 @@ body {
     display: flex;
     grid-template-columns: 1fr 2fr 1fr;
     position: relative;
-    top: 2vh;
+    top: 5vh;
     width: 90%;
     flex-direction: column;
   }
   #main {
     border: solid 0.5rem;
   }
-  .wider h3 {
+  h1 {
     font-size: 1rem;
     font-weight: 700;
   }
-  button.btn-num {
-    font-size: 1rem;
-  }
-  #main-c .btn-control, #main-c .opers {
+  body #wrap button.btns {
     font-size: 1rem;
   }
 }
