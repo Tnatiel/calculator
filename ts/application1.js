@@ -1,122 +1,166 @@
+// class Calculator111 {
 var _a;
-var Calculator111 = /** @class */ (function () {
-    function Calculator111() {
-        this.firstOperand = '';
-        this.secondOperand = '';
-        this.action = '';
-        this.lastCalculated = 0;
-        this.state = 'Reg';
-        this.expressionStorage = [];
-    }
-    Calculator111.prototype.updateScreen = function (key) {
-        var temp = byId('screen');
-        // console.log(`UpScr given key: ${key}`)
-        // console.log(`fir op: ${this.firstOperand} sec op: ${this.secondOperand}`);
-        // console.log(`action: ${this.action} last cal: ${this.lastCalculated}`);
-        temp.innerHTML += "".concat(key);
-    };
-    Calculator111.prototype.parseNum = function (num) {
-        if (this.state === 'Reg') {
-            var lastChar = byId('screen').innerHTML.slice(-1);
-            console.log("last: ".concat(this.expressionStorage.slice(-1), " res: ").concat(eval(String(this.expressionStorage.slice(-1)))));
-            if (this.lastCalculated !== 0 && this.action === '') { //(this.expressionStorage.length >= 0 && this.lastCalculated === eval(String(this.expressionStorage.slice(-1)))) {
-                this.clearData();
-                this.firstOperand += num;
-                this.updateScreen(num);
-            }
-            else if (num === '.' && '1234567890'.includes(lastChar)) {
-                console.log(this.firstOperand);
-                if (this.firstOperand !== '' && this.firstOperand.includes(num) === false) {
-                    this.firstOperand += num;
-                    this.updateScreen(num);
-                }
-                else if (this.secondOperand !== '' && this.secondOperand.includes(num) === false) {
-                    this.secondOperand += num;
-                    this.updateScreen(num);
-                }
-                else {
-                    return;
-                }
-            }
-            else if (this.action === '' && num !== '.') {
-                this.firstOperand += num;
-                this.updateScreen(num);
-            }
-            else if (num !== '.') {
-                this.secondOperand += num;
-                this.updateScreen(num);
-            }
-        }
-        // console.log(`fir op: ${this.firstOperand} sec op: ${this.secondOperand}`);
-    };
-    Calculator111.prototype.parseAction = function (oper) {
-        var lastChar = byId('screen').innerHTML.slice(-1);
-        if (lastChar === '' || lastChar == '.') {
-            return;
-        }
-        if ('+-/*'.includes(lastChar)) {
-            byId('screen').innerHTML = byId('screen').innerHTML.slice(0, -1);
-            this.action = oper;
-            this.updateScreen(oper);
-        }
-        else if (this.state === 'Reg') {
-            if (this.firstOperand !== '' && this.secondOperand !== '') {
-                this.calculate();
-                this.action = oper;
-                byId('screen').innerHTML = this.lastCalculated;
-            }
-            else {
-                this.action = oper;
-                this.updateScreen(oper);
-            }
-        }
-        else if (this.state === 'Sci') {
-            var highOpers = '*/';
-            var lowOpers = '-+';
-        }
-    };
-    Calculator111.prototype.calculate = function () {
-        if (this.state === 'Reg') {
-            // console.log(`fir op: ${this.firstOperand} act: ${this.action} sec: ${this.secondOperand}`)
-            var curData = this.firstOperand + this.action + this.secondOperand;
-            this.expressionStorage.push(curData);
-            var res = (eval(this.firstOperand + this.action + this.secondOperand));
-            this.clearData();
-            this.lastCalculated = res;
-            this.firstOperand = res.toString();
-            // console.log(`fir op: ${this.firstOperand}`)
-            // this.action = res;
-        }
-    };
-    Calculator111.prototype.clearData = function () {
-        // console.log('before "clear')
-        // console.log(`fir op: ${this.firstOperand} sec op: ${this.secondOperand}`);
-        // console.log(`action: ${this.action} last cal: ${this.lastCalculated}`);
-        cal.firstOperand = '';
-        cal.secondOperand = '';
-        cal.action = '';
-        cal.lastCalculated = 0;
-        byId('screen').innerHTML = '';
-        console.log(this);
-    };
-    Calculator111.prototype.deleteLastKey = function () {
-        var lastKey = byId('screen').innerHTML.slice(-1);
-        if (byId('screen').innerHTML.length < 1 || byId('screen').innerHTML == this.lastCalculated) {
-            return;
-        }
-        else if (this.secondOperand !== '') {
-            this.secondOperand = this.secondOperand.slice(0, -1);
-        }
-        else if ('+-/*'.includes(lastKey)) {
-            this.action = '';
-        }
-        else {
-            this.firstOperand = this.firstOperand.slice(0, -1);
-        }
-        byId('screen').innerHTML = byId('screen').innerHTML.slice(0, -1);
-    };
-    return Calculator111;
-}());
+//     firstOperand: string;
+//     secondOperand: string;
+//     thirdOperand: string;
+//     action1: string;
+//     action2 :string
+//     operArr: string[]
+//     lastCalculated: number;
+//     state: string;
+//     expressionStorage: string[];
+//     constructor() {
+//         this.firstOperand = '';
+//         this.secondOperand = '';
+//         this.action1 = '';
+//         this.lastCalculated = 0;
+//         this.state = 'Reg'
+//         this.expressionStorage = []
+//     }
+//     updateScreen(key: string) {
+//         let temp: HTMLDivElement = byId('screen');
+//         temp.innerHTML += `${key}`
+//     } 
+//     parseNum (num:string): void {
+//         const lastChar:string =  byId('screen').innerHTML.slice(-1)
+//         console.log(`last: ${this.expressionStorage.slice(-1)} res: ${eval(String(this.expressionStorage.slice(-1)))}`)
+//         if (this.lastCalculated !== 0 &&  this.action1 === '') { //(this.expressionStorage.length >= 0 && this.lastCalculated === eval(String(this.expressionStorage.slice(-1)))) {
+//             this.clearData();
+//             this.firstOperand += num;
+//             this.updateScreen(num);
+//             return
+//         } if (this.state === 'Reg') {
+//             // DOT CASES
+//             if (num === '.' && '1234567890'.includes(lastChar)){
+//                 console.log(this.firstOperand);     
+//                 if (this.firstOperand !== '' && this.firstOperand.includes(num) === false) {
+//                     this.firstOperand += num;
+//                     this.updateScreen(num);
+//                 } else if (this.secondOperand !== '' && this.secondOperand.includes(num) === false) {
+//                     this.secondOperand += num;
+//                     this.updateScreen(num);
+//                 } else {return}
+//             // FILL OPERANDS
+//             } else if (this.action1 === '' && num !== '.') {
+//                 this.firstOperand += num;
+//                 this.updateScreen(num);
+//             } else if (num !== '.') {
+//                 this.secondOperand += num ; 
+//                 this.updateScreen(num);
+//             }
+//         } else if (this.state === 'Sci') {
+//             //  DOT CASES
+//             if (num === '.' && '1234567890'.includes(lastChar)){
+//                 if (this.firstOperand !== '' && this.firstOperand.includes(num) === false) {
+//                     this.firstOperand += num;
+//                     this.updateScreen(num);
+//                 } else if (this.secondOperand !== '' && this.secondOperand.includes(num) === false) {
+//                     this.secondOperand += num;
+//                     this.updateScreen(num);
+//                 } else if (this.thirdOperand !== '' && this.thirdOperand.includes(num) === false) {
+//                     this.thirdOperand += num;
+//                     this.updateScreen(num);
+//                 } else {return}
+//             // FILL OPERANDS
+//             } else if (this.action1 === '' && num !== '.') {
+//                 this.firstOperand += num;
+//                 this.updateScreen(num);
+//             } else if (this.action2 === '' && num !== '.') {
+//                 this.secondOperand += num ; 
+//                 this.updateScreen(num);
+//             } else if (num !== '.') {
+//                 this.thirdOperand += num;
+//                 this.updateScreen(num);
+//             }
+//         } else {alert(`The state ${this.state}isn\'t defined.\nPlease check calculator\'s state`)}
+//         // console.log(`fr-op: ${this.firstOperand} sc-op: ${this.secondOperand}`)
+//         // console.log()
+//     }
+//     parseAction(oper:string) {
+//         const lastChar:string =  byId('screen').innerHTML.slice(-1);
+//         if (lastChar === '' || lastChar == '.') {return} 
+//         if ('+-/*'.includes(lastChar)) {
+//            byId('screen').innerHTML = byId('screen').innerHTML.slice(0,-1); 
+//            this.action1 = oper
+//            this.updateScreen(oper);
+//        } 
+//         else if (this.state === 'Reg') {
+//              if (this.firstOperand !== '' && this.secondOperand !== ''){
+//                 this.calculate();
+//                 this.action1 = oper;
+//                 byId('screen').innerHTML = this.lastCalculated;
+//             } else {
+//                 this.action1 = oper
+//                 this.updateScreen(oper)
+//             }
+//         } else if (this.state === 'Sci') {
+//             // console.log(`this: ${cal} act1: ${this.action1} act2: ${this.action2}`);
+//             if (cal.action1 === '') {
+//                 cal.action1 = oper;
+//                 cal.updateScreen(oper);
+//             } else if (cal.action2 === '') {
+//                 cal.action2 = oper;
+//                 cal.updateScreen(oper);
+//             } if (this.firstOperand !== '' && this.secondOperand !== '' && this.thirdOperand !== ''){
+//                 this.calculate();
+//                 this.action1 = oper;
+//                 byId('screen').innerHTML = this.lastCalculated;
+//             } 
+//             // else {
+//             //     if ('*/'.includes(this.operArr[0] && this.operArr[1])) {
+//             //         this.action1 = this.operArr[0]
+//             //         this.action2 = this.operArr[1]
+//             //     } else if ('+-'.includes[this.operArr[0]] && '*/'.includes(this.operArr[1])) {
+//             //         this.action1 = this.operArr[1];
+//             //         this.action2 = this.operArr[0];
+//             //     } else {
+//             //         this.action1 = this.operArr[0];
+//             //         this.action2 = this.operArr[1];
+//             //     }
+//             // }
+//         } else {alert(`The state ${this.state}isn\'t defined.\nPlease check calculator\'s state`)}
+//         console.log(`1act1: ${this.action1}`)
+//     }
+//     calculate() {
+//         if (this.state === 'Reg') {
+//             // console.log(`fir op: ${this.firstOperand} act: ${this.action} sec: ${this.secondOperand}`)
+//             let curData: string = this.firstOperand + this.action1 + this.secondOperand;
+//             this.expressionStorage.push(curData);
+//             let res: number = (eval(this.firstOperand + this.action1 + this.secondOperand));
+//             this.clearData();
+//             this.lastCalculated = res;
+//             this.firstOperand = res.toString();
+//         } else if (this.state === 'Sci') {
+//             let curData: string = this.firstOperand + this.action1 + this.secondOperand + this.action2 + this.thirdOperand;
+//             this.expressionStorage.push(curData);
+//             let res: number = (eval(this.firstOperand + this.action1 + this.secondOperand + this.action2 + this.thirdOperand));
+//             this.clearData();
+//             this.lastCalculated = res;
+//             this.firstOperand = res.toString();
+//         }
+//     }
+//     clearData() {
+//         cal.firstOperand = '';
+//         cal.secondOperand = '';
+//         cal.action1 = '';
+//         cal.lastCalculated = 0;
+//         byId('screen').innerHTML = ''
+//         if (this.state === 'Sci') {
+//             this.action2 = ''
+//             this.thirdOperand = ''
+//         }
+//     }
+//     deleteLastKey() {
+//         const lastKey = byId('screen').innerHTML.slice(-1);
+//         if (byId('screen').innerHTML.length < 1 || byId('screen').innerHTML == this.lastCalculated) {return}
+//         else if (this.secondOperand !== '') {
+//             this.secondOperand = this.secondOperand.slice(0,-1)
+//         } else if ('+-/*'.includes(lastKey)){
+//             this.action1 = '';
+//         } else {this.firstOperand = this.firstOperand.slice(0, -1)}
+//         byId('screen').innerHTML = byId('screen').innerHTML.slice(0, -1);
+//     }
+// }
 // SHORTCUTS
 var byId = document.getElementById.bind(document);
 var byClass = document.getElementsByClassName.bind(document);
@@ -160,6 +204,7 @@ byId('info').addEventListener('click', function () {
         byId('page-wraper').classList.add('page-wraper');
     }
 });
+// INFO OK BUTTON
 byId('info-ok-btn').addEventListener('click', function () {
     byId('page-wraper').classList.remove('info-page-shown');
     byId('page-wraper').classList.add('page-wraper');
@@ -195,11 +240,11 @@ var numBtns = byClass('btn-num');
 var _loop_1 = function (i) {
     var numBtn = numBtns[i];
     numBtn.addEventListener('click', function () {
-        if (byId('screen').innerHTML == cal.lastCalculated) {
-            byId('screen').innerHTML = '';
-        }
+        // if (byId('screen').innerHTML == cal.lastCalculated) {
+        //     byId('screen').innerHTML = ''
+        // }
         cal.parseNum(numBtn.id);
-        console.log("fir op: ".concat(cal.firstOperand, " sec op: ").concat(cal.secondOperand));
+        // console.log(`fir op: ${cal.firstOperand} sec op: ${cal.secondOperand}`);
     });
 };
 for (var i = 0; i < numBtns.length; i++) {
@@ -219,7 +264,7 @@ for (var j = 0; j < operBtns.length; j++) {
 // EQUAL BUTTON
 byId("=").addEventListener('click', function () {
     console.log("fir op: ".concat(cal.firstOperand, " sec op: ").concat(cal.secondOperand));
-    if (cal.firstOperand !== '' && cal.action !== '' && cal.secondOperand !== '') {
+    if (cal.firstOperand !== '' && cal.action1 !== '' && cal.secondOperand !== '') {
         cal.calculate();
         byId('screen').innerHTML = cal.lastCalculated;
     }
@@ -233,11 +278,40 @@ byId('return').addEventListener('click', function () {
 });
 // SCIENCE
 byId('sci-btn').addEventListener('click', function () {
-    byId('scientific-sec').classList.toggle('sci-shown-r');
-    byId('sci-btn').classList.toggle('light-on-btn');
+    // byId('scientific-sec').classList.toggle('sci-shown-r');
+    // byId('sci-btn').classList.toggle('light-on-btn')
+    if (byId('scientific-sec').classList.contains('sci-shown-r')) {
+        byId('scientific-sec').classList.remove('sci-shown-r');
+        byId('sci-btn').classList.remove('light-on-btn');
+        cal.state = 'Reg';
+    }
+    else {
+        byId('scientific-sec').classList.add('sci-shown-r');
+        byId('sci-btn').classList.add('light-on-btn');
+        cal.state = 'Sci';
+        cal.thirdOperand = '';
+        cal.action2 = '';
+        cal.operArr = [];
+    }
+    console.log(cal.state);
 });
 // HISTORY
 byId('history-btn').addEventListener('click', function () {
     byId('history-sec').classList.toggle('history-shown-r');
     byId('history-btn').classList.toggle('light-on-btn');
+    if (byId('history-btn').classList.contains('light-btn-on')) {
+        cal.state = 'Sci';
+    }
+    else {
+        'Reg';
+    }
+    // if (byId('history-sec').classList.contains('history-shown-r')) {
+    //     byId('history-sec').classList.remove('history-shown-r');
+    //     byId('history-btn').classList.remove('light-on-btn')
+    //     cal.state = 'Reg'
+    // } else {
+    //     byId('history-sec').classList.add('history-shown-r');
+    //     byId('history-btn').classList.add('light-on-btn')
+    //     cal.state = 'Sci';
+    // }
 });
