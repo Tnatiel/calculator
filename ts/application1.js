@@ -244,6 +244,9 @@ var Calculator111 = /** @class */ (function () {
 // SHORTCUTS
 var byId = document.getElementById.bind(document);
 var byClass = document.getElementsByClassName.bind(document);
+// BUTTONS
+var numBtns = byClass('btn-num');
+var operBtns = byClass('opers');
 var cal = new Calculator111();
 document.addEventListener('DOMContentLoaded', function () {
     localStorage.clear();
@@ -312,8 +315,35 @@ function changeSettings() {
     var font = localStorage.getItem('font');
     var color = localStorage.getItem('color');
     var mode = localStorage.getItem('mode');
-    byId('body').style.fontFamily = font;
-    byId('body').style.backgroundColor = color;
+    console.log("font: ".concat(font));
+    console.log("color: ".concat(color));
+    console.log("mode: ".concat(mode));
+    if (font !== null) {
+        byId('body').style.fontFamily = font;
+        for (var i = 0; i < byClass('written-btns').length; i++) {
+            var element = byClass('written-btns')[i];
+            element.style.fontFamily = font;
+        }
+        // for (const btn in operBtns) {
+        //     const curBtn = operBtns[btn];
+        //     if (curBtn !== undefined) {
+        //         // const curBtn: HTMLButtonElement = operBtns[btn];
+        //         // curBtn.style.fontFamily = font;
+        //         // console.log(curBtn)
+        //         console.log(operBtns)
+        //     }
+        // }
+        // for (const btn in numBtns) {
+        //     const curBtn: HTMLButtonElement = numBtns[btn];
+        //     if (curBtn !== undefined) {
+        //         const curBtn: HTMLButtonElement = numBtns[btn];
+        //         curBtn.style.fontFamily = font;
+        //     }
+        // }
+    }
+    if (color !== null) {
+        byId('body').style.backgroundColor = color;
+    }
     if (mode === 'dark') {
         byId('body').classList.add('dark-body');
     }
@@ -321,26 +351,24 @@ function changeSettings() {
         byId('body').classList.remove('dark-body');
     }
 }
-// ******************HANDLE BTNS CLICKS********************
-// NUMBER BUTTONS
-var numBtns = byClass('btn-num');
 var _loop_1 = function (i) {
     var numBtn = numBtns[i];
     numBtn.addEventListener('click', function () {
         cal.parseNum(numBtn.id);
     });
 };
+// ******************HANDLE BTNS CLICKS********************
+// NUMBER BUTTONS
 for (var i = 0; i < numBtns.length; i++) {
     _loop_1(i);
 }
-// OPER BUTTONS
-var operBtns = byClass('opers');
 var _loop_2 = function (j) {
     var operBtn = operBtns[j];
     operBtn.addEventListener('click', function () {
         cal.parseAction(operBtn.id);
     });
 };
+// OPER BUTTONS
 for (var j = 0; j < operBtns.length; j++) {
     _loop_2(j);
 }

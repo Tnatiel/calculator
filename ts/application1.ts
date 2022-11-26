@@ -232,11 +232,21 @@ class Calculator111 {
 // When i worked with the calculator.ts file sometimes, randomly application.ts didn't recognized the Calculator class
 
 
+
+
+
 // APP PART 
 // SHORTCUTS
 
 const byId = document.getElementById.bind(document);
 const byClass = document.getElementsByClassName.bind(document);
+
+// BUTTONS
+const numBtns: HTMLButtonElement[] = byClass('btn-num');
+const operBtns: HTMLButtonElement[] = byClass('opers');
+
+
+
 
 const cal = new Calculator111()
 
@@ -307,6 +317,7 @@ byId('screen-light-btn').addEventListener('click', () => {
 window.addEventListener('storage', () => {
     console.log(localStorage);
     if (localStorage.length > 0) {
+        
         changeSettings();
     }
 })
@@ -314,11 +325,40 @@ window.addEventListener('storage', () => {
 // The function to apply the changes
 
 function changeSettings() {
-    const font = localStorage.getItem('font');
-    const color = localStorage.getItem('color');
-    const mode = localStorage.getItem('mode');
-    byId('body').style.fontFamily = font;
-    byId('body').style.backgroundColor = color;
+    const font: string = localStorage.getItem('font') as string;
+    const color: string = localStorage.getItem('color') as string;
+    const mode: string = localStorage.getItem('mode') as string;
+    console.log(`font: ${font}`);
+    console.log(`color: ${color}`);
+    console.log(`mode: ${mode}`);
+
+    if (font !== null) {
+        byId('body').style.fontFamily = font;
+        for (let i = 0; i < byClass('written-btns').length; i++) {
+            const element = byClass('written-btns')[i];
+            element.style.fontFamily = font;
+        }
+        // for (const btn in operBtns) {
+        //     const curBtn = operBtns[btn];
+        //     if (curBtn !== undefined) {
+        //         // const curBtn: HTMLButtonElement = operBtns[btn];
+        //         // curBtn.style.fontFamily = font;
+        //         // console.log(curBtn)
+        //         console.log(operBtns)
+        //     }
+        // }
+        // for (const btn in numBtns) {
+        //     const curBtn: HTMLButtonElement = numBtns[btn];
+        //     if (curBtn !== undefined) {
+        //         const curBtn: HTMLButtonElement = numBtns[btn];
+        //         curBtn.style.fontFamily = font;
+        //     }
+        // }
+    }
+    if (color !== null) {
+        byId('body').style.backgroundColor = color;
+
+    }
     if (mode === 'dark') {
         byId('body').classList.add('dark-body');
     } else {byId('body').classList.remove('dark-body');}
@@ -330,7 +370,6 @@ function changeSettings() {
 // ******************HANDLE BTNS CLICKS********************
 
 // NUMBER BUTTONS
-const numBtns: HTMLButtonElement[] = byClass('btn-num');
 for (let i = 0; i < numBtns.length; i++) {
     const numBtn: HTMLButtonElement = numBtns[i];
     numBtn.addEventListener('click', () => {
@@ -339,7 +378,6 @@ for (let i = 0; i < numBtns.length; i++) {
 }
 
 // OPER BUTTONS
-const operBtns: HTMLButtonElement[] = byClass('opers');
 for (let j = 0; j < operBtns.length; j++) {
     const operBtn: HTMLButtonElement = operBtns[j];
     operBtn.addEventListener('click', () => {
