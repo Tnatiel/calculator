@@ -301,11 +301,13 @@ byId('settings').addEventListener('click', function () {
     var params = 'resizable=no,status=no,location=no,toolbar=no,menubar=no,scrollbars=no,location=no,width=600,height=500,left=300,top=200';
     var myWind = window.open('/config.html', 'config', params);
 });
-// I tried in various ways to listen when localStorage.lenght === 3 
-//  Couldn't find the way in time..
+window.addEventListener('storage', function () {
+    console.log(localStorage);
+    if (localStorage.length > 0) {
+        changeSettings();
+    }
+});
 // The function to apply the changes
-// I know the font setting probably wouldn't work but because i couldn't complete the previous part
-// i just worte a general idea
 function changeSettings() {
     var font = localStorage.getItem('font');
     var color = localStorage.getItem('color');
@@ -313,10 +315,10 @@ function changeSettings() {
     byId('body').style.fontFamily = font;
     byId('body').style.backgroundColor = color;
     if (mode === 'dark') {
-        byId('body').classList.add('dark-mode');
+        byId('body').classList.add('dark-body');
     }
     else {
-        byId('body').classList.remove('dark-mode');
+        byId('body').classList.remove('dark-body');
     }
 }
 // ******************HANDLE BTNS CLICKS********************

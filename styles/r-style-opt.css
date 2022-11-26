@@ -325,8 +325,8 @@ body {
     width: 90%;
     flex-direction: column;
   }
-  #main {
-    border: solid 0.5rem;
+  body #wrap #screen {
+    font-size: 5vw;
   }
   h1 {
     font-size: 1rem;

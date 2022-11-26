@@ -242,7 +242,9 @@ const cal = new Calculator111()
 
 document.addEventListener('DOMContentLoaded', () => {
     localStorage.clear()
+    
 })
+
 
 // CREATING MESSAGE DIV
 const version = '1'
@@ -302,13 +304,15 @@ byId('screen-light-btn').addEventListener('click', () => {
     const myWind = window.open('/config.html','config', params) as Window;
 })
 
-// I tried in various ways to listen when localStorage.lenght === 3 
-//  Couldn't find the way in time..
-
+window.addEventListener('storage', () => {
+    console.log(localStorage);
+    if (localStorage.length > 0) {
+        changeSettings();
+    }
+})
 
 // The function to apply the changes
-// I know the font setting probably wouldn't work but because i couldn't complete the previous part
-// i just worte a general idea
+
 function changeSettings() {
     const font = localStorage.getItem('font');
     const color = localStorage.getItem('color');
@@ -316,8 +320,8 @@ function changeSettings() {
     byId('body').style.fontFamily = font;
     byId('body').style.backgroundColor = color;
     if (mode === 'dark') {
-        byId('body').classList.add('dark-mode');
-    } else {byId('body').classList.remove('dark-mode');}
+        byId('body').classList.add('dark-body');
+    } else {byId('body').classList.remove('dark-body');}
 
  }
 
@@ -337,7 +341,7 @@ for (let i = 0; i < numBtns.length; i++) {
 // OPER BUTTONS
 const operBtns: HTMLButtonElement[] = byClass('opers');
 for (let j = 0; j < operBtns.length; j++) {
-    const operBtn: HTMLButtonElement = operBtns[j]
+    const operBtn: HTMLButtonElement = operBtns[j];
     operBtn.addEventListener('click', () => {
     cal.parseAction(operBtn.id);
     });
