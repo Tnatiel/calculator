@@ -274,7 +274,7 @@ body {
     display: flex;
     grid-template-columns: 1fr 2fr 1fr;
     position: relative;
-    top: 2vh;
+    top: 3vh;
     width: 90%;
     flex-direction: column;
   }

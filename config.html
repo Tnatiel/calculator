@@ -39,7 +39,7 @@
                             <option value="Archivo Narrow, sans-serif">Archivo Narrow</option>
                             <option value="Concert One, cursive">Concert One</option>
                             <option value="Source Code Pro, monospace">Source Code Pro</option>
-                            <option value="Mrs Saint Delafield, cursive">Mrs Saint Delafield</option>
+                            <option value="Sedgwick Ave, cursive">Sedgwick Ave</option>
                         </select>
                     </div>
                     <div class="mode">
@@ -55,8 +55,10 @@
                 </form>
             </section>
         </main>
-        <script import> // tried to export part of application.ts
-
+        <script type="module"> // tried to export as part of application.ts
+        // import {init, handleSelect, subBtn} from './ts/application1.js';
+        // init();
+        // subBtn();
             document.addEventListener('DOMContentLoaded', () => {
                 localStorage.clear()
                 document.getElementById('color-select').addEventListener('input', handle_select);

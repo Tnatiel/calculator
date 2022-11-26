@@ -1,4 +1,27 @@
+// TO  MAKE THE CODE WORK ADD var exports = {} IS application.js file
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+
+// so the code could run
 class Calculator111 {
 
     firstOperand: string;
@@ -337,23 +360,9 @@ function changeSettings() {
         for (let i = 0; i < byClass('written-btns').length; i++) {
             const element = byClass('written-btns')[i];
             element.style.fontFamily = font;
+            
         }
-        // for (const btn in operBtns) {
-        //     const curBtn = operBtns[btn];
-        //     if (curBtn !== undefined) {
-        //         // const curBtn: HTMLButtonElement = operBtns[btn];
-        //         // curBtn.style.fontFamily = font;
-        //         // console.log(curBtn)
-        //         console.log(operBtns)
-        //     }
-        // }
-        // for (const btn in numBtns) {
-        //     const curBtn: HTMLButtonElement = numBtns[btn];
-        //     if (curBtn !== undefined) {
-        //         const curBtn: HTMLButtonElement = numBtns[btn];
-        //         curBtn.style.fontFamily = font;
-        //     }
-        // }
+
     }
     if (color !== null) {
         byId('body').style.backgroundColor = color;
@@ -387,7 +396,11 @@ for (let j = 0; j < operBtns.length; j++) {
 
 // EQUAL BUTTON
 byId("=").addEventListener('click', () => {
-    if (cal.firstOperand !== '' && cal.action1 !== '' && cal.secondOperand !== ''){
+    if (cal.scietificModeState) {
+        if (cal.firstOperand && cal.action1 && cal.secondOperand && cal.action2 && cal.thirdOperand !== '')
+        cal.calculate()
+    }
+    else if (cal.firstOperand && cal.action1 && cal.secondOperand !== ''){
         cal.calculate();       
     }
 })
@@ -457,8 +470,35 @@ function deleteHistory() {
     byId('history-sec').appendChild(newDiv)
 }
 
-// UPDATE HISTORY LOG
 
-// CREATE AN UNORDERED LIST
-// APPEND TO "cal-history"
-// EVERY CALCULATE THAT HAPPENS APPEND AS <li>
+
+// last try export
+
+// cant delet this exports now with out the whole code is breaking
+// somthing about double identifier and changing it's name don't help
+
+export function init() {
+    document.addEventListener('DOMContentLoaded', () => {
+        localStorage.clear()
+        byId('color-select').addEventListener('input', handleSelect);
+        byId('font-select').addEventListener('input', handleSelect);         
+        const ops = document.getElementsByName('mode');
+        for (const op of ops) {
+            op.addEventListener('change', handleSelect);
+        }
+    })
+}
+export function handleSelect(ev) {
+    let select = ev.target;
+    localStorage.setItem(select.name, select.value)
+}
+
+export function subBtn() {
+    if (byId('sub') !== null || undefined) {
+        byId('sub').addEventListener('click', (evt) => {
+            evt.preventDefault();
+            window.close();
+        })
+    }
+}
+

@@ -1,4 +1,29 @@
+"use strict";
+// TO  MAKE THE CODE WORK ADD var exports = {} IS application.js file
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 var _a;
+exports.__esModule = true;
+exports.subBtn = exports.handleSelect = exports.init = void 0;
+// so the code could run
 var Calculator111 = /** @class */ (function () {
     function Calculator111() {
         this.firstOperand = '';
@@ -324,22 +349,6 @@ function changeSettings() {
             var element = byClass('written-btns')[i];
             element.style.fontFamily = font;
         }
-        // for (const btn in operBtns) {
-        //     const curBtn = operBtns[btn];
-        //     if (curBtn !== undefined) {
-        //         // const curBtn: HTMLButtonElement = operBtns[btn];
-        //         // curBtn.style.fontFamily = font;
-        //         // console.log(curBtn)
-        //         console.log(operBtns)
-        //     }
-        // }
-        // for (const btn in numBtns) {
-        //     const curBtn: HTMLButtonElement = numBtns[btn];
-        //     if (curBtn !== undefined) {
-        //         const curBtn: HTMLButtonElement = numBtns[btn];
-        //         curBtn.style.fontFamily = font;
-        //     }
-        // }
     }
     if (color !== null) {
         byId('body').style.backgroundColor = color;
@@ -374,7 +383,11 @@ for (var j = 0; j < operBtns.length; j++) {
 }
 // EQUAL BUTTON
 byId("=").addEventListener('click', function () {
-    if (cal.firstOperand !== '' && cal.action1 !== '' && cal.secondOperand !== '') {
+    if (cal.scietificModeState) {
+        if (cal.firstOperand && cal.action1 && cal.secondOperand && cal.action2 && cal.thirdOperand !== '')
+            cal.calculate();
+    }
+    else if (cal.firstOperand && cal.action1 && cal.secondOperand !== '') {
         cal.calculate();
     }
 });
@@ -436,7 +449,33 @@ function deleteHistory() {
     newDiv.setAttribute('id', 'cal-history');
     byId('history-sec').appendChild(newDiv);
 }
-// UPDATE HISTORY LOG
-// CREATE AN UNORDERED LIST
-// APPEND TO "cal-history"
-// EVERY CALCULATE THAT HAPPENS APPEND AS <li>
+// last try export
+// cant delet this exports now with out the whole code is breaking
+// somthing about double identifier and changing it's name don't help
+function init() {
+    document.addEventListener('DOMContentLoaded', function () {
+        localStorage.clear();
+        byId('color-select').addEventListener('input', handleSelect);
+        byId('font-select').addEventListener('input', handleSelect);
+        var ops = document.getElementsByName('mode');
+        for (var _i = 0, ops_1 = ops; _i < ops_1.length; _i++) {
+            var op = ops_1[_i];
+            op.addEventListener('change', handleSelect);
+        }
+    });
+}
+exports.init = init;
+function handleSelect(ev) {
+    var select = ev.target;
+    localStorage.setItem(select.name, select.value);
+}
+exports.handleSelect = handleSelect;
+function subBtn() {
+    if (byId('sub') !== null || undefined) {
+        byId('sub').addEventListener('click', function (evt) {
+            evt.preventDefault();
+            window.close();
+        });
+    }
+}
+exports.subBtn = subBtn;
