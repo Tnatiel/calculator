@@ -188,6 +188,15 @@ button.btn-num:hover {
   display: grid;
   grid-template-rows: 0.5fr 3fr;
 }
+.history-shown-r #cal-history ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+}
+.history-shown-r #cal-history ul li {
+  margin: 0.1rem 0.4rem;
+}
 
 .sci-hidden-r {
   display: none;

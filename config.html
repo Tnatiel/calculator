@@ -11,13 +11,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alegreya+SC&family=Amatic+SC:wght@700&family=Archivo+Narrow:wght@500&family=Concert+One&family=Source+Code+Pro&display=swap" rel="stylesheet">
 </head>
-    <body>
+    <body id="body">
         <main>
             <section class="main-sec">
                 <!-- TRY BULID -->
 
                 <h1 id="header">Customize the page as you please</h1>
-                <form method="get" action="/" id="config-form">
+                <form name="myf" id="config-form">
                     <div class="labels color">
                         <label for="color-select">Please select a color:</label>
                         <select name="color" id="color-select">    
@@ -35,7 +35,7 @@
                         <select name="font" id="font-select">
                             
                             <option value="">--Choose a font--</option>
-                            <option value="alegreya-sc" onclick="() => {console.log('hello')}">Alegreya SC</option>
+                            <option value="alegreya-sc">Alegreya SC</option>
                             <option value="archivo-Narrow">Archivo Narrow</option>
                             <option value="concert-one">Concert One</option>
                             <option value="source-Code-Pro">Source Code Pro</option>
@@ -55,40 +55,41 @@
                 </form>
             </section>
         </main>
-        <script>
-            document.getElementById('sub').addEventListener('click', () => {})
-            const opts = document.querySelectorAll('option');
-            for (const op of opts) {
-                if (op.value !== '') {
-                    op.addEventListener('click', () => {
-                        console.log('hello');
-                        console.log(op)
-                        console.log(op.value)
-                    })
-                }
-                console.log(op.value)
-            }
-            // localStorage[0] = 
-            
-            // document.getElementById('sub').addEventListener('click', (evt) => {
-            //     const http = new XMLHttpRequest();
-            //     http.open('GET', 'http://127.0.0.1:5501/config.html')
-            //     http.send()
+        <script import> // tried to export part of application.ts
 
-            //     http.onreadystatechange = (evt) => {
-            //         if(http.readyState == 4 && this.status == 200)
-            //             console.log(http.responseText);
-            //     }
-                // async () => {
-                //     const response = await fetch('/config.html')
-                //     response.json().then( data => {
-                //         console.log(data)
-                //         GET
-                //     })
-            // }
-                // const myStr = String(window.location);
-                // alert(myStr)
+            document.addEventListener('DOMContentLoaded', () => {
+                localStorage.clear()
+                document.getElementById('color-select').addEventListener('input', handle_select);
+                document.getElementById('font-select').addEventListener('input', handle_select);         
+                const ops = document.getElementsByName('mode');
+                for (const op of ops) {
+                    op.addEventListener('change', handle_select);
+                }
+            })
+
+            function handle_select(ev) {
+                let select = ev.target;
+                localStorage.setItem(select.name, select.value)
+                console.log(document.getElementById('body'))
+            }
             
+            
+            document.getElementById('sub').addEventListener('click', (evt) => {
+                evt.preventDefault()
+                curPage = window
+                
+                window.close()
+                document.addEventListener('click', () => {
+                    const font = localStorage.getItem('font');
+                    const color = localStorage.getItem('color');
+                    const mode = localStorage.getItem('mode');
+                    document.getElementById('body').style.fontFamily = font;
+                    document.getElementById('body').style.backgroundColor = color;
+                    if (mode === 'dark') {
+                        document.getElementById('body').classList.add('dark-mode')
+                    } else {document.getElementById('body').classList.remove('dark-mode')}
+                })
+            })
         </script>
     </body>
 </html>

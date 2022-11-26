@@ -9,4 +9,15 @@
     border-bottom: solid 0.1rem;
     display: grid;
     grid-template-rows: 0.5fr 3fr;
+
+    #cal-history ul {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        list-style: none;
+        li {
+            margin: 0.1rem 0.4rem;
+        }
+        
+    }
 }
