@@ -1,4 +1,4 @@
-const byId = document.getElementById.bind(document);
+
 
 class Calculator111 {
 
@@ -10,7 +10,8 @@ class Calculator111 {
     operArr: string[];
     lastCalculated: number;
     scietificModeState: boolean;
-    historyModeState: boolean
+    historyModeState: boolean;
+    remoteModeState: boolean;
     expressionStorage: string[];
     constructor() {
         this.firstOperand = '';
@@ -19,28 +20,30 @@ class Calculator111 {
         this.lastCalculated = 0;
         this.scietificModeState = false;
         this.historyModeState = false;
+        this.remoteModeState = false;
         this.expressionStorage = [];
     }
 
     updateScreen(key: string) {
-        let temp: HTMLDivElement = byId1('screen');
+        let temp: HTMLDivElement = byId('screen');
         temp.innerHTML += `${key}`;
     } 
 
     parseNum (num:string): void {
-        const lastChar:string =  byId1('screen').innerHTML.slice(-1)
-        if (byId1('screen').innerHTML.length === 1 && byId1('screen').innerHTML == '0') {
+        console.log('num');
+        const lastChar:string =  byId('screen').innerHTML.slice(-1)
+        if (byId('screen').innerHTML.length === 1 && byId('screen').innerHTML == '0') {
             if (this.firstOperand = '') {
                 this.firstOperand = num;
-                byId1('screen'). innerHTML = num;
+                byId('screen'). innerHTML = num;
                 
             } else if (this.secondOperand = '') {
                 this.secondOperand = num
-                byId1('screen'). innerHTML = num;
+                byId('screen'). innerHTML = num;
                 
             } else {
                 this.thirdOperand = num;
-                byId1('screen'). innerHTML = num;
+                byId('screen'). innerHTML = num;
             }
         } 
         else if (this.lastCalculated !== 0 &&  this.action1 === '') { 
@@ -105,10 +108,10 @@ class Calculator111 {
     }
 
     parseAction(oper:string) {
-        const lastChar:string =  byId1('screen').innerHTML.slice(-1);
+        const lastChar:string =  byId('screen').innerHTML.slice(-1);
         if (lastChar === '' || lastChar == '.') {return} 
         if ('+-/*'.includes(lastChar)) {
-           byId1('screen').innerHTML = byId1('screen').innerHTML.slice(0,-1); 
+           byId('screen').innerHTML = byId('screen').innerHTML.slice(0,-1); 
            this.action1 = oper;
            this.updateScreen(oper);
        } 
@@ -116,7 +119,7 @@ class Calculator111 {
              if (this.firstOperand !== '' && this.secondOperand !== ''){
                 this.calculate();
                 this.action1 = oper;
-                byId1('screen').innerHTML = this.lastCalculated + oper;
+                byId('screen').innerHTML = this.lastCalculated + oper;
             } else {
                 this.action1 = oper;
                 this.updateScreen(oper);
@@ -124,22 +127,26 @@ class Calculator111 {
         
         } else if (this.scietificModeState === true) {
             // console.log(`this: ${cal} act1: ${this.action1} act2: ${this.action2}`);
-            if (this.action1 === '') {
-                this.action1 = oper;
-                this.updateScreen(oper);
-            } else if (this.action2 === '') {
-                this.action2 = oper;
-                this.updateScreen(oper);
+            if (cal.action1 === '') {
+                cal.action1 = oper;
+                cal.updateScreen(oper);
+            } else if (cal.action2 === '') {
+                cal.action2 = oper;
+                cal.updateScreen(oper);
 
             } if (this.firstOperand !== '' && this.secondOperand !== '' && this.thirdOperand !== ''){
                 this.calculate();
                 this.action1 = oper;
-                byId1('screen').innerHTML = this.lastCalculated + oper;
+                byId('screen').innerHTML = this.lastCalculated + oper;
             } 
         } else {alert(`The state ${this.scietificModeState}isn\'t defined.\nPlease check calculator\'s state`)}
     }
 
     calculate() {
+        if (this.remoteModeState) {
+            this.remoteCalculate();
+            return;
+        }
         if (this.scietificModeState === false) {
             // console.log(`fir op: ${this.firstOperand} act: ${this.action} sec: ${this.secondOperand}`)
             let res: number = (eval(this.firstOperand + this.action1 + this.secondOperand));
@@ -174,13 +181,39 @@ class Calculator111 {
         } else {alert(`The state ${this.scietificModeState} isn\'t defined.\nPlease check calculator\'s state`)}
     }
 
+    async remoteCalculate() {
+        console.log(this.thirdOperand);
+        if ( this.thirdOperand !== undefined) {
+            const rawExpression: string = this.firstOperand + this.action1 + this.secondOperand + this.action2 + this.thirdOperand;
+            let toSendExpression: string = encodeURIComponent(rawExpression);
+            const response: Response = await fetch(`http://api.mathjs.org/v4/?expr=${toSendExpression}`);
+            const result: string = await response.text();
+            this.expressionStorage.push(rawExpression);
+            this.clearData();
+            this.lastCalculated = Number(result);
+            this.firstOperand = result.toString();
+            this.updateScreen(result)
+
+        } else if (this.secondOperand !== undefined) {
+            const rawExpression: string = this.firstOperand + this.action1 + this.secondOperand;
+            let toSendExpression: string = encodeURIComponent(rawExpression);
+            const response: Response = await fetch(`http://api.mathjs.org/v4/?expr=${toSendExpression}`);
+            const result: string = await response.text();
+            this.expressionStorage.push(rawExpression);
+            this.clearData();
+            this.lastCalculated = Number(result);
+            this.firstOperand = result.toString();
+            this.updateScreen(result);
+        } else {alert('Please enter a valid expression');}
+    }
+
     clearData() {
 
-        this.firstOperand = '';
-        this.secondOperand = '';
-        this.action1 = '';
-        this.lastCalculated = 0;
-        byId1('screen').innerHTML = '';
+        cal.firstOperand = '';
+        cal.secondOperand = '';
+        cal.action1 = '';
+        cal.lastCalculated = 0;
+        byId('screen').innerHTML = '';
         if (this.scietificModeState === true) {
             this.action2 = '';
             this.thirdOperand = '';
@@ -188,8 +221,8 @@ class Calculator111 {
     }
 
     deleteLastKey() {
-        const lastKey = byId1('screen').innerHTML.slice(-1);
-        if (byId1('screen').innerHTML.length < 1) {return}
+        const lastKey = byId('screen').innerHTML.slice(-1);
+        if (byId('screen').innerHTML.length < 1) {return}
         
         if (this.scietificModeState === false) {
 
@@ -220,12 +253,12 @@ class Calculator111 {
             } else {this.firstOperand = this.firstOperand.slice(0, -1);}
         } else {alert(`The state ${this.scietificModeState} isn\'t defined.\nPlease check calculator\'s state`)}
 
-        byId1('screen').innerHTML = byId1('screen').innerHTML.slice(0, -1);    
+        byId('screen').innerHTML = byId('screen').innerHTML.slice(0, -1);    
     }
 
     updateHistory() {
         const curLi:HTMLLIElement = document.createElement('li');
         curLi.innerHTML = this.expressionStorage.slice(-1).toString();
-        byId1('express-list').appendChild(curLi);
+        byId('express-list').appendChild(curLi);
     }
 }
