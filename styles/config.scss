@@ -2,6 +2,7 @@
 
 // If bugs ouccor add ':' after 'font-family'
 // Exm. font-family: 'Source Code Pro', monospace;
+
 $font1: font-family 'Alegreya SC', serif;
 $font2: font-family 'Amatic SC', cursive;
 $font3: font-family 'Archivo Narrow', sans-serif;
@@ -25,7 +26,7 @@ $font5: font-family 'Source Code Pro', monospace;
     border: solid 0.2vh;
     border-color: rgba(0, 0, 0, 0.329);
     border-radius: 1.5vh;
-    height: 3.5vh;
+    height: 4.5vh;
   }
 
 //   mode toggle
@@ -87,18 +88,14 @@ $font5: font-family 'Source Code Pro', monospace;
 //   
   .main-sec {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-rows: 0.5fr 1fr;
     align-items: center;
-    background-color: lightcyan;
     width: fit-content;
     position: relative;
-    top: 15vh;
     padding: 3rem;
   }
   
   .labels {
-    grid-column: 1/2;
     display: flex;
     flex-direction: column;
     gap: 3vh;
@@ -158,4 +155,12 @@ input[type='checkbox'] {
 body {
     display: flex;
     justify-content: center;
+    background-color: lightcyan;
+}
+
+#config-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 2vh;
 }
