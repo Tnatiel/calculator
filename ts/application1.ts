@@ -1,5 +1,7 @@
 
 
+
+
 // When i worked with the calculator.ts file sometimes, randomly application.ts didn't recognized the Calculator class
 
 

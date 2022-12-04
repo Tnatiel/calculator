@@ -1,5 +1,4 @@
 
-
 class Calculator111 {
 
     firstOperand: string;
